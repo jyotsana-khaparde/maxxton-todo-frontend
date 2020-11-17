@@ -39,7 +39,7 @@ class TaskModal extends Component {
                 <label>Title</label><br/>
                 <input name='title' value={this.state.title} onChange={this.handleChange} placeholder='Title' style={{padding: 5, margin: '6px 0px 6px 0px', width: 588}} /><br/>
                 <label>Description</label><br/>
-                <textarea name='description' value={this.state.description} onChange={this.handleChange} placeholder='Description' style={{padding: 5, margin: '6px 0px 6px 0px', width: 588}} /><br/>
+                <textarea name='description' value={this.state.description} onChange={this.handleChange} placeholder='Description' style={{padding: 5, margin: '6px 0px 6px 0px', width: 588, height: 100}} /><br/>
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                     <div>
                         <label>Due Date</label><br/>
@@ -49,9 +49,6 @@ class TaskModal extends Component {
                             id="datetime-local"
                             type="datetime-local"
                             value={this.state.DueDate}
-                            InputLabelProps={{
-                            shrink: true,
-                            }}
                             onChange={this.handleChange}
                         />
                     </div>
@@ -66,7 +63,7 @@ class TaskModal extends Component {
                     </div>
                 </div>
                 <div style={{textAlign: 'end'}}>
-                    <Button type="submit" variant="contained" style={{padding: 5, margin: 4}}>
+                    <Button type="submit" variant="contained" style={{padding: 5, margin: 4, color: 'white', background: 'grey'}}>
                         Cancel
                     </Button>
                     <Button type="submit" variant="contained" style={{background: 'rgb(69 173 93)', color: 'white', padding: 5, margin: 4}}>
