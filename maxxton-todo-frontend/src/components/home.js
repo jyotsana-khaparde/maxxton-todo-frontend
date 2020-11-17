@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Header from '../components/header';
+import Tabs from '../components/tabs';
 
 class Home extends Component {
     constructor(props) {
@@ -12,6 +13,7 @@ class Home extends Component {
         return (
             <>
                 <Header/>
+                <Tabs/>
             </>
         )
     }
