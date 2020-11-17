@@ -1,4 +1,5 @@
-import React, {Component} from 'react'
+import React, {Component} from 'react';
+import Header from '../components/header';
 
 class Home extends Component {
     constructor(props) {
@@ -9,7 +10,9 @@ class Home extends Component {
 
     render() {
         return (
-            <h1>hello</h1>
+            <>
+                <Header/>
+            </>
         )
     }
 }
