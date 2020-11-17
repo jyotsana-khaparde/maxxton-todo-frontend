@@ -1,0 +1,40 @@
+{
+  "tasks": [
+    {
+      "id": 1,
+      "CurrentState": "json-server",
+      "Title": "typicode",
+      "Description": "",
+      "CreatedAt": "",
+      "DueDate": "",
+      "Priority": ""
+    },
+    {
+      "id": 2,
+      "CurrentState": "json-server",
+      "Title": "typicode",
+      "Description": "",
+      "CreatedAt": "",
+      "DueDate": "",
+      "Priority": ""
+    },
+    {
+      "id": 6,
+      "CurrentState": "Pending",
+      "Title": "my first title",
+      "Description": "my first Description",
+      "CreatedAt": "November 17, 2020",
+      "DueDate": "2017-05-12T10:30",
+      "Priority": "coconut"
+    },
+    {
+      "id": "aacfcfbe-30d0-4e97-99b1-0ea57ea24324",
+      "CurrentState": "Pending",
+      "Title": "second title",
+      "Description": "second Description",
+      "CreatedAt": "November 17, 2020",
+      "DueDate": "2017-05-05T10:32",
+      "Priority": "mango"
+    }
+  ]
+}

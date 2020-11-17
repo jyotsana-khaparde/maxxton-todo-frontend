@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import Modal from '@material-ui/core/Modal';
 import TextField from '@material-ui/core/TextField';
 import { Button } from '@material-ui/core';
+import moment from 'moment';
+import axios from 'axios';
+const uuid = require('uuid');
 
 class TaskModal extends Component {
     constructor(props) {
@@ -9,8 +12,8 @@ class TaskModal extends Component {
         this.state = {
             title: '',
             description: '',
-            DueDate: '2017-05-24T10:30',
-            Priority: ''
+            dueDate: '2017-05-24T10:30',
+            priority: ''
         }
     }
 
@@ -23,6 +26,20 @@ class TaskModal extends Component {
 
     handleSubmit = () => {
         console.log('handleSubmit done')
+        axios.post('http://localhost:3000/tasks', {
+            id: uuid.v4(),
+            CurrentState: 'Pending',
+            Title: this.state.title,
+            Description: this.state.description,
+            CreatedAt: moment(new Date()).format("MMMM DD, YYYY"),
+            DueDate: this.state.dueDate,
+            Priority: this.state.priority
+        }).then(resp => {
+            console.log(resp.data);
+        }).catch(error => {
+            console.log(error);
+        }); 
+
     }
 
     render() {
@@ -45,16 +62,16 @@ class TaskModal extends Component {
                         <label>Due Date</label><br/>
                         <TextField
                             style={{padding: 5, margin: '6px 0px 6px 0px'}}
-                            name='DueDate'
+                            name='dueDate'
                             id="datetime-local"
                             type="datetime-local"
-                            value={this.state.DueDate}
+                            value={this.state.dueDate}
                             onChange={this.handleChange}
                         />
                     </div>
                     <div>
                         <label>Priority</label><br/>
-                        <select name='Priority' style={{padding: 5, margin: '15px 0px 0px 0px', width: 294}} value={this.state.Priority} onChange={this.handleChange}>
+                        <select name='priority' style={{padding: 5, margin: '15px 0px 0px 0px', width: 294}} value={this.state.priority} onChange={this.handleChange}>
                             <option value="grapefruit">Low</option>
                             <option value="lime">Medium</option>
                             <option value="coconut">High</option>
