@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
+import ListPage from './list';
 
 class TabsList extends Component {
     constructor(props) {
@@ -28,6 +29,7 @@ class TabsList extends Component {
                     <Tab label="Completed" />
                     <Tab label="Pending" />
                 </Tabs>
+                <ListPage/>
             </>
         )
     }
