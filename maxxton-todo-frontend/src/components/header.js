@@ -40,7 +40,7 @@ class Header extends Component {
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'center' }}
-                onClick={this.handleAddTask}>
+                    onClick={this.handleAddTask}>
                     <AddIcon style={{ color: 'white' }}/>
                 </div>
             </div>
@@ -49,7 +49,7 @@ class Header extends Component {
                 <TaskModal
                     open={openAddTaskModal}
                     handleClose={() => this.setState({ openAddTaskModal: false})}
-                    heading='Add Task'
+                    heading={'Add Task'}
                     handleModalSubmit={this.handleSubmit}
                 />
             }

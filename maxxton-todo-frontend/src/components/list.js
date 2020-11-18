@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import { getTaskList } from '../actions/todo-actions';
+import { getTaskList, editTask } from '../actions/todo-actions';
 import TaskModal from '../components/add-task-form';
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
@@ -25,6 +25,12 @@ class ListPage extends Component {
             [key]: true,
             taskDataObject: dataLists
         })
+    }
+
+    handleSubmit = (payload) => {
+        console.log('handleSubmit payload for edit modal-->', payload);
+        this.props.editTask(payload)
+        this.setState({ openEditTaskModal: false })
     }
 
     componentDidMount() {
@@ -67,14 +73,15 @@ class ListPage extends Component {
                 {this.state.openTaskReadOnlyModal && <TaskModal
                     open={this.state.openTaskReadOnlyModal}
                     handleClose={() => this.setState({ openTaskReadOnlyModal: false })}
-                    heading='View Task'
+                    heading={'View Task'}
                     taskDataObject={this.state.taskDataObject}
                 />}
                 {this.state.openEditTaskModal && <TaskModal
                     open={this.state.openEditTaskModal}
                     handleClose={() => this.setState({ openEditTaskModal: false })}
-                    heading='Edit Task'
+                    heading={'Edit Task'}
                     taskDataObject={this.state.taskDataObject}
+                    handleModalSubmit={this.handleSubmit}
                 />}
             </>
         )
@@ -90,7 +97,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        getTaskList: () => dispatch(getTaskList())
+        getTaskList: () => dispatch(getTaskList()),
+        editTask: (payload) => dispatch(editTask(payload))
     }
 };
 

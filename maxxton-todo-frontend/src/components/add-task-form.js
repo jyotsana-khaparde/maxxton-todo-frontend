@@ -26,14 +26,31 @@ class TaskModal extends Component {
     }
 
     handleSubmit = (e) => {
-        const payload = {
-            id: uuid.v4(),
-            CurrentState: 'Pending',
-            Title: this.state.title,
-            Description: this.state.description,
-            CreatedAt: moment(new Date()).format("MMMM DD, YYYY"),
-            DueDate: this.state.dueDate,
-            Priority: this.state.priority
+        let payload;
+        console.log('this.props.heading----', this.props.heading, typeof this.props.heading);
+        if (this.props.heading === 'Edit Task') {
+            payload = {
+                id: this.props.taskDataObject.id,
+                CurrentState: this.props.taskDataObject.CurrentState,
+                Title: this.state.title,
+                Description: this.state.description,
+                CreatedAt: this.props.taskDataObject.CreatedAt,
+                DueDate: this.state.dueDate,
+                Priority: this.state.priority
+            }
+            console.log('payload inside Edit Task handleSubmit modal ->', payload);
+        }
+        if (this.props.heading === 'Add Task') {
+            payload = {
+                id: uuid.v4(),
+                CurrentState: 'Pending',
+                Title: this.state.title,
+                Description: this.state.description,
+                CreatedAt: moment(new Date()).format("MMMM DD, YYYY"),
+                DueDate: this.state.dueDate,
+                Priority: this.state.priority
+            }
+            console.log('payload inside Add Task handleSubmit modal ->', payload);
         }
         this.props.handleModalSubmit(payload)
         e.preventDefault()

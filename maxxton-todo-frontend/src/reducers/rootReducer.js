@@ -1,4 +1,4 @@
-import { GET_TASK_LIST, ADD_TASK } from '../constants/actionTypes'
+import { GET_TASK_LIST, ADD_TASK, EDIT_TASK } from '../constants/actionTypes'
 
 const initialState = {
     taskList: [],
@@ -20,6 +20,20 @@ const todoReducer = (state = initialState, action) => {
         return {
             ...state,
             taskList: updatedDate
+        }
+        case EDIT_TASK:
+            console.log('EDIT_TASK reducer---', action.data);
+            console.log('state reducer----', state.taskList)
+            let editedTaskList = [...state.taskList];
+            for(let i = 0; i < editedTaskList.length; i++) {
+                if (editedTaskList[i].id === action.data.id) {
+                    editedTaskList[i] = action.data
+                }
+            }
+            console.log('updatedDate reducer found----', editedTaskList);
+        return {
+            ...state,
+            taskList: editedTaskList
         }
         default: return state
     }

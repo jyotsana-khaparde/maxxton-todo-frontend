@@ -1,4 +1,4 @@
-import { GET_TASK_LIST, ADD_TASK } from '../constants/actionTypes'
+import { GET_TASK_LIST, ADD_TASK, EDIT_TASK } from '../constants/actionTypes'
 import axios from 'axios';
 
 export const getTaskList = () => {
@@ -19,7 +19,7 @@ export const addTask = (payload) => {
         axios.post('http://localhost:3000/tasks', payload)
           .then(res => {
             console.log('addTask action---->',res.data);
-            dispatch({ type: ADD_TASK, data: res.data})
+            dispatch({ type: ADD_TASK, data: res.data })
           })
           .catch(error => {
               console.log('error-->', error)
@@ -27,3 +27,15 @@ export const addTask = (payload) => {
     }
 }
 
+export const editTask = (payload) => {
+  return (dispatch) => {
+      axios.put(`http://localhost:3000/tasks/${payload.id}`, payload)
+        .then(res => {
+          console.log('editTask action---->',res.data);
+          dispatch({ type: EDIT_TASK, data: res.data })
+        })
+        .catch(error => {
+          console.log('error-->', error)
+        })
+  }
+}
