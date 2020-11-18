@@ -12,15 +12,17 @@ class ListPage extends Component {
         console.log(' props.taskList  ;;;;;;;', props.taskList );
         this.state = {
             openTaskReadOnlyModal: false,
-            readOnlyData: {}
+            openEditTaskModal: false,
+            taskDataObject: {}
         }
     }
 
-    handleTrClick = (dataLists) => {
+    handleTrClick = (e, dataLists, key) => {
         console.log('dataLists:-----', dataLists);
+        e.stopPropagation()
         this.setState({
-            openTaskReadOnlyModal: true,
-            readOnlyData: dataLists
+            [key]: true,
+            taskDataObject: dataLists
         })
     }
 
@@ -44,13 +46,14 @@ class ListPage extends Component {
                     </thead>
                     <tbody>
                         {this.props.taskList.reverse().map(dataLists => (
-                            <tr key={dataLists.id} onClick={() => this.handleTrClick(dataLists)}>
+                            <tr key={dataLists.id} onClick={(e) => this.handleTrClick(e, dataLists, 'openTaskReadOnlyModal')}>
                                 <td style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8}}>{dataLists.Title}</td>
                                 <td style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8}}>{dataLists.Priority}</td>
                                 <td style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8}}>{dataLists.CreatedAt}</td>
                                 <td style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8}}>{dataLists.DueDate}</td>
                                 <td style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8, display: 'flex'}}>
-                                    <EditOutlinedIcon style={{ padding: 5, borderRadius: 5, background: 'rgb(38, 131, 222)', color: 'white', margin: 3 }}/>
+                                    <EditOutlinedIcon style={{ padding: 5, borderRadius: 5, background: 'rgb(38, 131, 222)', color: 'white', margin: 3 }}
+                                    onClick={(e) => this.handleTrClick(e, dataLists, 'openEditTaskModal')}/>
                                     <Button variant="contained" style={{ borderRadius: 5, background: 'rgb(69 173 93)', color: 'white', padding: 5, margin: 3}}>
                                         Done
                                     </Button>
@@ -64,7 +67,13 @@ class ListPage extends Component {
                     open={this.state.openTaskReadOnlyModal}
                     handleClose={() => this.setState({ openTaskReadOnlyModal: false })}
                     heading='View Task'
-                    taskDataObject={this.state.readOnlyData}
+                    taskDataObject={this.state.taskDataObject}
+                />}
+                {this.state.openEditTaskModal && <TaskModal
+                    open={this.state.openEditTaskModal}
+                    handleClose={() => this.setState({ openEditTaskModal: false })}
+                    heading='Edit Task'
+                    taskDataObject={this.state.taskDataObject}
                 />}
             </>
         )
