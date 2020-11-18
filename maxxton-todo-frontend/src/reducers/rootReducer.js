@@ -8,9 +8,10 @@ const todoReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_TASK_LIST:
             console.log('taskList reducer---', action.data);
+            let taskListData = [...action.data]
         return {
             ...state,
-            taskList: action.data
+            taskList: taskListData
         }
         case ADD_TASK:
             console.log('ADD_TASK reducer---', action.data);

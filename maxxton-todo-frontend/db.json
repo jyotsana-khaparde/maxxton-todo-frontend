@@ -17,6 +17,24 @@
       "CreatedAt": "November 17, 2020",
       "DueDate": "2017-05-05T10:32",
       "Priority": "Medium"
+    },
+    {
+      "id": "9e8fd28c-e44a-4e79-a3da-c8f306565ebb",
+      "CurrentState": "Pending",
+      "Title": "my newly added task",
+      "Description": "my newly added task Description",
+      "CreatedAt": "November 19, 2020",
+      "DueDate": "2020-11-01T01:25",
+      "Priority": "None"
+    },
+    {
+      "id": "4623fc5e-a1d9-48e5-836b-a429a9063404",
+      "CurrentState": "Done",
+      "Title": "my second pask",
+      "Description": "my second pask",
+      "CreatedAt": "November 19, 2020",
+      "DueDate": "2020-11-05T01:25",
+      "Priority": "High"
     }
   ]
 }

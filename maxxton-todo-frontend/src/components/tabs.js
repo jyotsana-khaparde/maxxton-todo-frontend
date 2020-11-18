@@ -29,7 +29,7 @@ class TabsList extends Component {
                     <Tab label="Completed" />
                     <Tab label="Pending" />
                 </Tabs>
-                <ListPage/>
+                <ListPage tabNumber={this.state.value}/>
             </>
         )
     }

@@ -11,22 +11,30 @@ import DeleteModal from './deleteModal';
 class ListPage extends Component {
     constructor(props) {
         super(props)
-        console.log(' props.taskList  ;;;;;;;', props.taskList );
+        console.log('props.taskList;;;;;;;', props );
         this.state = {
             openTaskReadOnlyModal: false,
             openEditTaskModal: false,
             openDeleteModal: false,
-            taskDataObject: {}
+            taskDataObject: {},
+            updateCurrentState: false
         }
     }
 
     handleTrClick = (e, dataLists, key) => {
         console.log('dataLists:-----', dataLists);
         e.stopPropagation()
-        this.setState({
-            [key]: true,
-            taskDataObject: dataLists
-        })
+        if (key === 'updateCurrentState') {
+            console.log('Current State update karo->', dataLists);
+            dataLists['CurrentState'] === 'Pending' ? dataLists['CurrentState'] = 'Done' : dataLists['CurrentState'] = 'Pending'; 
+            console.log('updated current state->', dataLists);
+            this.props.editTask(dataLists)
+        } else {
+            this.setState({
+                [key]: true,
+                taskDataObject: dataLists
+            });
+        }
     }
 
     handleSubmit = (payload) => {
@@ -47,7 +55,19 @@ class ListPage extends Component {
     }
 
     render() {
-        console.log('taskList:- ', this.props.taskList);
+        console.log('taskList:- ',this.props.tabNumber, this.props.taskList);
+        let seperateTabData = []
+        if(this.props.tabNumber === 0) {
+            seperateTabData = [...this.props.taskList]
+        }
+        if(this.props.tabNumber === 1) {
+            let completedFilterData = [...this.props.taskList]
+            seperateTabData = completedFilterData.filter(completedFilterData => completedFilterData.CurrentState === 'Done')
+        }
+        if(this.props.tabNumber === 2) {
+            let completedFilterData = [...this.props.taskList]
+            seperateTabData = completedFilterData.filter(completedFilterData => completedFilterData.CurrentState === 'Pending') 
+        }
         return (
             <>
                 <table style={{fontFamily: 'arial, sans-serif', borderCollapse: 'collapse', width: '100%', marginTop: 10}}>
@@ -61,19 +81,36 @@ class ListPage extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {(this.props.taskList && this.props.taskList.reverse() || []).map(dataLists => (
+                        {(seperateTabData && seperateTabData.reverse() || []).map(dataLists => (
                             <tr key={dataLists.id} onClick={(e) => this.handleTrClick(e, dataLists, 'openTaskReadOnlyModal')}>
-                                <td style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8}}>{dataLists.Title}</td>
-                                <td style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8}}>{dataLists.Priority}</td>
-                                <td style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8}}>{moment(dataLists.CreatedAt).format("YYYY-DD-MM")}</td>
-                                <td style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8}}>{moment(dataLists.DueDate).format("YYYY-DD-MM")}</td>
+                                <td style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8, textDecoration: dataLists.CurrentState === 'Done' ? 'line-through' : 'none'}}>
+                                    {dataLists.Title}
+                                </td>
+                                <td style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8, textDecoration: dataLists.CurrentState === 'Done' ? 'line-through' : 'none'}}>
+                                    {dataLists.Priority}
+                                </td>
+                                <td style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8, textDecoration: dataLists.CurrentState === 'Done' ? 'line-through' : 'none'}}>
+                                    {moment(dataLists.CreatedAt).format("YYYY-DD-MM")}
+                                </td>
+                                <td style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8, textDecoration: dataLists.CurrentState === 'Done' ? 'line-through' : 'none'}}>
+                                    {moment(dataLists.DueDate).format("YYYY-DD-MM")}
+                                </td>
                                 <td style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8, display: 'flex'}}>
-                                    <EditOutlinedIcon style={{ padding: 5, borderRadius: 5, background: 'rgb(38, 131, 222)', color: 'white', margin: 3 }}
-                                    onClick={(e) => this.handleTrClick(e, dataLists, 'openEditTaskModal')}/>
-                                    <Button variant="contained" style={{ borderRadius: 5, background: 'rgb(69 173 93)', color: 'white', padding: 5, margin: 3}}>
-                                        Done
+                                    <EditOutlinedIcon
+                                        style={{ padding: 5, borderRadius: 5, background: 'rgb(38, 131, 222)', color: 'white', margin: 3 }}
+                                        onClick={(e) => this.handleTrClick(e, dataLists, 'openEditTaskModal')}
+                                    />
+                                    <Button
+                                        variant="contained" 
+                                        style={{ borderRadius: 5, background: dataLists.CurrentState === 'Done' ? '#54a4a9' : 'rgb(69 173 93)', color: 'white', padding: 5, margin: 3}}
+                                        onClick={(e) => this.handleTrClick(e, dataLists, 'updateCurrentState')}
+                                    >
+                                        {dataLists.CurrentState === 'Pending' ? 'Done' : 'Re-Open'}
                                     </Button>
-                                    <DeleteOutlineOutlinedIcon onClick={(e) => this.handleTrClick(e, dataLists, 'openDeleteModal')} style={{ padding: 5, borderRadius: 5, background: '#cc1717', color: 'white', margin: 3 }}/>
+                                    <DeleteOutlineOutlinedIcon
+                                        onClick={(e) => this.handleTrClick(e, dataLists, 'openDeleteModal')}
+                                        style={{ padding: 5, borderRadius: 5, background: '#cc1717', color: 'white', margin: 3 }}
+                                    />
                                 </td>
                             </tr>
                         ))}
