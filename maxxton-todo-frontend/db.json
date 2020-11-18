@@ -1,31 +1,13 @@
 {
   "tasks": [
     {
-      "id": 1,
-      "CurrentState": "json-server",
-      "Title": "typicode",
-      "Description": "",
-      "CreatedAt": "",
-      "DueDate": "",
-      "Priority": ""
-    },
-    {
-      "id": 2,
-      "CurrentState": "json-server",
-      "Title": "typicode",
-      "Description": "",
-      "CreatedAt": "",
-      "DueDate": "",
-      "Priority": ""
-    },
-    {
       "id": 6,
       "CurrentState": "Pending",
       "Title": "my first title",
       "Description": "my first Description",
       "CreatedAt": "November 17, 2020",
       "DueDate": "2017-05-12T10:30",
-      "Priority": "coconut"
+      "Priority": "Medium"
     },
     {
       "id": "aacfcfbe-30d0-4e97-99b1-0ea57ea24324",
@@ -34,16 +16,187 @@
       "Description": "second Description",
       "CreatedAt": "November 17, 2020",
       "DueDate": "2017-05-05T10:32",
-      "Priority": "mango"
+      "Priority": "Medium"
     },
     {
-      "id": "11b7825c-b787-4a67-b6b9-dff6c1945406",
+      "id": "b3bc5766-c213-4db3-b9ee-e2c2e8f48237",
       "CurrentState": "Pending",
-      "Title": "",
-      "Description": "",
-      "CreatedAt": "November 17, 2020",
-      "DueDate": "2017-05-24T10:30",
-      "Priority": ""
+      "Title": "aaaaa",
+      "Description": "aaaaaaa",
+      "CreatedAt": "November 18, 2020",
+      "DueDate": "2017-05-10T10:30",
+      "Priority": "Medium"
+    },
+    {
+      "id": "f2bef093-6fba-45c1-a9b4-dd1102639f3d",
+      "CurrentState": "Pending",
+      "Title": "asdf",
+      "Description": "ASDFG",
+      "CreatedAt": "November 18, 2020",
+      "DueDate": "2017-05-05T10:30",
+      "Priority": "Low"
+    },
+    {
+      "id": "30032a4c-603f-47c1-9121-ef1adacadd38",
+      "CurrentState": "Pending",
+      "Title": "mmmmm",
+      "Description": "mmmmmm",
+      "CreatedAt": "November 18, 2020",
+      "DueDate": "2017-05-06T10:30",
+      "Priority": "Low"
+    },
+    {
+      "id": "8683a230-43a0-44df-8084-62a0d8440fec",
+      "CurrentState": "Pending",
+      "Title": "koook",
+      "Description": ",koklkmk",
+      "CreatedAt": "November 18, 2020",
+      "DueDate": "2017-05-10T10:30",
+      "Priority": "Medium"
+    },
+    {
+      "id": "e8e95073-32cf-435c-b1ec-387bbf50170b",
+      "CurrentState": "Pending",
+      "Title": "qqqqqq",
+      "Description": "qqqqqqqq",
+      "CreatedAt": "November 18, 2020",
+      "DueDate": "2017-05-02T22:33",
+      "Priority": "High"
+    },
+    {
+      "id": "9261aac8-5a62-432d-a356-0b65d6783587",
+      "CurrentState": "Pending",
+      "Title": "tttttttttt",
+      "Description": "tttttttttt",
+      "CreatedAt": "November 18, 2020",
+      "DueDate": "2017-05-17T13:30",
+      "Priority": "None"
+    },
+    {
+      "id": "6ef28466-c5ba-4bc7-9a71-f515ac88bf2b",
+      "CurrentState": "Pending",
+      "Title": "aaaaa",
+      "Description": "aaaaaaa",
+      "CreatedAt": "November 18, 2020",
+      "DueDate": "2017-05-10T10:30",
+      "Priority": "High"
+    },
+    {
+      "id": "608ebe78-0e4d-46b9-8ece-dd92ba65369d",
+      "CurrentState": "Pending",
+      "Title": "my work done",
+      "Description": "Description for my work done",
+      "CreatedAt": "November 18, 2020",
+      "DueDate": "2020-11-05T07:08",
+      "Priority": "High"
+    },
+    {
+      "id": "66069245-21ad-4ddf-89ca-f6b569905f72",
+      "CurrentState": "Pending",
+      "Title": "mumma given work",
+      "Description": "mumma given work Description",
+      "CreatedAt": "November 18, 2020",
+      "DueDate": "2020-11-01T19:22",
+      "Priority": "None"
+    },
+    {
+      "id": "987899d1-2182-42b8-b786-899afec2dc6d",
+      "CurrentState": "Pending",
+      "Title": "asdyuikjhgfd",
+      "Description": "ASDFGHYJHNGBFVDSA",
+      "CreatedAt": "November 18, 2020",
+      "DueDate": "2020-11-02T07:18",
+      "Priority": "High"
+    },
+    {
+      "id": "9e921a2d-d099-4d25-94b5-2dd9ffd8ae38",
+      "CurrentState": "Pending",
+      "Title": "1111111",
+      "Description": "111111",
+      "CreatedAt": "November 18, 2020",
+      "DueDate": "2020-11-05T07:20",
+      "Priority": "High"
+    },
+    {
+      "id": "bd3ab193-b782-49ed-8aaa-94010bab2b1e",
+      "CurrentState": "Pending",
+      "Title": "jyo",
+      "Description": "erqrqq",
+      "CreatedAt": "November 18, 2020",
+      "DueDate": "2020-11-07T07:21",
+      "Priority": "None"
+    },
+    {
+      "id": "8b6ddd8a-f77c-4999-965f-e6693ef05aa2",
+      "CurrentState": "Pending",
+      "Title": "rrrrr",
+      "Description": "rrrrr",
+      "CreatedAt": "November 18, 2020",
+      "DueDate": "2020-11-01T07:23",
+      "Priority": "Medium"
+    },
+    {
+      "id": "b59fa898-b5bc-42c7-a076-35774136838b",
+      "CurrentState": "Pending",
+      "Title": "121212",
+      "Description": "121212",
+      "CreatedAt": "November 18, 2020",
+      "DueDate": "2020-11-11T07:32",
+      "Priority": "High"
+    },
+    {
+      "id": "bc0a748b-2cf5-4e25-a7b5-19cbe1beb034",
+      "CurrentState": "Pending",
+      "Title": "11",
+      "Description": "111",
+      "CreatedAt": "November 18, 2020",
+      "DueDate": "2020-11-04T07:33",
+      "Priority": "Medium"
+    },
+    {
+      "id": "d4fdde45-6643-4896-a34b-149f13cc1232",
+      "CurrentState": "Pending",
+      "Title": "13",
+      "Description": "1234",
+      "CreatedAt": "November 18, 2020",
+      "DueDate": "2020-11-13T07:34",
+      "Priority": "Medium"
+    },
+    {
+      "id": "0d397891-9351-4014-b67f-aed255287ed5",
+      "CurrentState": "Pending",
+      "Title": "qqqqqq",
+      "Description": "qqqqqqqq",
+      "CreatedAt": "November 18, 2020",
+      "DueDate": "2020-11-06T19:39",
+      "Priority": "High"
+    },
+    {
+      "id": "8a7abb52-e519-4d8a-9f3d-8d657432426c",
+      "CurrentState": "Pending",
+      "Title": "1",
+      "Description": "1",
+      "CreatedAt": "November 18, 2020",
+      "DueDate": "2020-11-06T07:39",
+      "Priority": "None"
+    },
+    {
+      "id": "5a86a5a2-b0ee-4d8e-a395-96e3b0e996f3",
+      "CurrentState": "Pending",
+      "Title": "12",
+      "Description": "12",
+      "CreatedAt": "November 18, 2020",
+      "DueDate": "2020-11-06T07:40",
+      "Priority": "None"
+    },
+    {
+      "id": "78709522-aa75-4808-9115-fea8bd0f42ee",
+      "CurrentState": "Pending",
+      "Title": "2",
+      "Description": "2",
+      "CreatedAt": "November 18, 2020",
+      "DueDate": "2020-11-12T07:50",
+      "Priority": "None"
     }
   ]
 }

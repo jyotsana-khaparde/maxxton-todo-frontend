@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import Modal from '@material-ui/core/Modal';
+import { connect } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
 import { Button } from '@material-ui/core';
+import Modal from '@material-ui/core/Modal';
 import moment from 'moment';
 import axios from 'axios';
 const uuid = require('uuid');
@@ -9,11 +10,12 @@ const uuid = require('uuid');
 class TaskModal extends Component {
     constructor(props) {
         super(props)
+        console.log('TaskModal props--->', props);
         this.state = {
-            title: '',
-            description: '',
-            dueDate: '2017-05-24T10:30',
-            priority: ''
+            title: props.taskDataObject && props.taskDataObject.Title || '',
+            description: props.taskDataObject && props.taskDataObject.Description || '',
+            dueDate: props.taskDataObject && props.taskDataObject.DueDate || '',
+            priority: props.taskDataObject && props.taskDataObject.Priority || ''
         }
     }
 
@@ -38,7 +40,7 @@ class TaskModal extends Component {
             console.log(resp.data);
         }).catch(error => {
             console.log(error);
-        }); 
+        });
 
     }
 
@@ -54,9 +56,9 @@ class TaskModal extends Component {
               <h3>{this.props.heading}</h3>  
             <form onSubmit={this.handleSubmit}>
                 <label>Title</label><br/>
-                <input name='title' value={this.state.title} onChange={this.handleChange} placeholder='Title' style={{padding: 5, margin: '6px 0px 6px 0px', width: 588}} /><br/>
+                <input readOnly={this.props.heading === 'View Task'} name='title' value={this.state.title} onChange={this.handleChange} placeholder='Title' style={{padding: 5, margin: '6px 0px 6px 0px', width: 588}} /><br/>
                 <label>Description</label><br/>
-                <textarea name='description' value={this.state.description} onChange={this.handleChange} placeholder='Description' style={{padding: 5, margin: '6px 0px 6px 0px', width: 588, height: 100}} /><br/>
+                <textarea readOnly={this.props.heading === 'View Task'} name='description' value={this.state.description} onChange={this.handleChange} placeholder='Description' style={{padding: 5, margin: '6px 0px 6px 0px', width: 588, height: 100}} /><br/>
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                     <div>
                         <label>Due Date</label><br/>
@@ -67,25 +69,28 @@ class TaskModal extends Component {
                             type="datetime-local"
                             value={this.state.dueDate}
                             onChange={this.handleChange}
+                            InputProps={{
+                                readOnly: this.props.heading === 'View Task', // if it is view modal then only readOnly will be true
+                            }}
                         />
                     </div>
                     <div>
                         <label>Priority</label><br/>
-                        <select name='priority' style={{padding: 5, margin: '15px 0px 0px 0px', width: 294}} value={this.state.priority} onChange={this.handleChange}>
-                            <option value="grapefruit">Low</option>
-                            <option value="lime">Medium</option>
-                            <option value="coconut">High</option>
-                            <option value="mango">None</option>
+                        <select disabled={this.props.heading === 'View Task'} name='priority' style={{padding: 5, margin: '15px 0px 0px 0px', width: 294}} value={this.state.priority} onChange={this.handleChange}>
+                            <option value="Low">Low</option>
+                            <option value="Medium">Medium</option>
+                            <option value="High">High</option>
+                            <option value="None">None</option>
                         </select>
                     </div>
                 </div>
                 <div style={{textAlign: 'end'}}>
-                    <Button type="submit" variant="contained" style={{padding: 5, margin: 4, color: 'white', background: 'grey'}}>
+                    <Button type="submit" variant="contained" style={{padding: 5, margin: 4, color: 'white', background: 'grey'}} onClick={this.props.handleClose}>
                         Cancel
                     </Button>
-                    <Button type="submit" variant="contained" style={{background: 'rgb(69 173 93)', color: 'white', padding: 5, margin: 4}}>
+                    {this.props.heading !== 'View Task' && <Button type="submit" variant="contained" style={{background: 'rgb(69 173 93)', color: 'white', padding: 5, margin: 4}}>
                         Save
-                    </Button>
+                    </Button>}
                 </div>
             </form>
             </div>
@@ -101,4 +106,9 @@ class TaskModal extends Component {
     }
 }
 
-export default TaskModal;
+const mapDispatchToProps = dispatch => {
+    return {
+    }
+};
+
+export default connect(null, mapDispatchToProps)(TaskModal);
