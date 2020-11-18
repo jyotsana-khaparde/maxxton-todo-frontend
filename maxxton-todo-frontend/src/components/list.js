@@ -2,6 +2,9 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { getTaskList } from '../actions/todo-actions';
 import TaskModal from '../components/add-task-form';
+import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
+import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
+import { Button } from '@material-ui/core';
 
 class ListPage extends Component {
     constructor(props) {
@@ -46,7 +49,13 @@ class ListPage extends Component {
                                 <td style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8}}>{dataLists.Priority}</td>
                                 <td style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8}}>{dataLists.CreatedAt}</td>
                                 <td style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8}}>{dataLists.DueDate}</td>
-                                <td style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8}}>{'done'}</td>
+                                <td style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8, display: 'flex'}}>
+                                    <EditOutlinedIcon style={{ padding: 5, borderRadius: 5, background: 'rgb(38, 131, 222)', color: 'white', margin: 3 }}/>
+                                    <Button variant="contained" style={{ borderRadius: 5, background: 'rgb(69 173 93)', color: 'white', padding: 5, margin: 3}}>
+                                        Done
+                                    </Button>
+                                    <DeleteOutlineOutlinedIcon style={{ padding: 5, borderRadius: 5, background: '#cc1717', color: 'white', margin: 3 }}/>
+                                </td>
                             </tr>
                         ))}
                     </tbody>
