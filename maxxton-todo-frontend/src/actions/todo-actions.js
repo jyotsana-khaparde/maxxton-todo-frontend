@@ -14,3 +14,15 @@ export const getTaskList = () => {
     }
 }
 
+export const addTask = (payload) => {
+    return () => {
+        axios.post('http://localhost:3000/tasks', payload)
+          .then(res => {
+            console.log('addTask action---->',res.data);
+          })
+          .catch(error => {
+              console.log('error-->', error)
+          })
+    }
+}
+

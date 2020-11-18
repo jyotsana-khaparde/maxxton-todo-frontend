@@ -41,13 +41,13 @@ class ListPage extends Component {
                     </thead>
                     <tbody>
                         {this.props.taskList.reverse().map(dataLists => (
-                                <tr onClick={() => this.handleTrClick(dataLists)}>
-                                    <td style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8}}>{dataLists.Title}</td>
-                                    <td style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8}}>{dataLists.Priority}</td>
-                                    <td style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8}}>{dataLists.CreatedAt}</td>
-                                    <td style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8}}>{dataLists.DueDate}</td>
-                                    <td style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8}}>{'done'}</td>
-                                </tr>
+                            <tr key={dataLists.id} onClick={() => this.handleTrClick(dataLists)}>
+                                <td style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8}}>{dataLists.Title}</td>
+                                <td style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8}}>{dataLists.Priority}</td>
+                                <td style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8}}>{dataLists.CreatedAt}</td>
+                                <td style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8}}>{dataLists.DueDate}</td>
+                                <td style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8}}>{'done'}</td>
+                            </tr>
                         ))}
                     </tbody>
                 </table>

@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
 import { Button } from '@material-ui/core';
 import Modal from '@material-ui/core/Modal';
+import { addTask } from '../actions/todo-actions';
 import moment from 'moment';
-import axios from 'axios';
 const uuid = require('uuid');
 
 class TaskModal extends Component {
@@ -27,8 +27,7 @@ class TaskModal extends Component {
     }
 
     handleSubmit = () => {
-        console.log('handleSubmit done')
-        axios.post('http://localhost:3000/tasks', {
+        const payload = {
             id: uuid.v4(),
             CurrentState: 'Pending',
             Title: this.state.title,
@@ -36,12 +35,8 @@ class TaskModal extends Component {
             CreatedAt: moment(new Date()).format("MMMM DD, YYYY"),
             DueDate: this.state.dueDate,
             Priority: this.state.priority
-        }).then(resp => {
-            console.log(resp.data);
-        }).catch(error => {
-            console.log(error);
-        });
-
+        }
+        this.props.addTask(payload)
     }
 
     render() {
@@ -108,6 +103,7 @@ class TaskModal extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
+        addTask: (payload) => dispatch(addTask(payload))
     }
 };
 
