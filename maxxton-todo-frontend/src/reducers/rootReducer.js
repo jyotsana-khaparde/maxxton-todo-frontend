@@ -1,4 +1,4 @@
-import { GET_TASK_LIST, ADD_TASK, EDIT_TASK } from '../constants/actionTypes'
+import { GET_TASK_LIST, ADD_TASK, EDIT_TASK, DELETE_TASK } from '../constants/actionTypes'
 
 const initialState = {
     taskList: [],
@@ -34,6 +34,15 @@ const todoReducer = (state = initialState, action) => {
         return {
             ...state,
             taskList: editedTaskList
+        }
+        case DELETE_TASK:
+            console.log('DELETE_TASK action.data---', action.data);
+            let dataForFilter = [...state.taskList];
+            let filteredData = dataForFilter.filter(dataForFilters => dataForFilters.id !== action.data)
+            console.log('filteredData reducer --->', filteredData);
+        return {
+            ...state,
+            taskList: filteredData
         }
         default: return state
     }

@@ -17,42 +17,6 @@
       "CreatedAt": "November 17, 2020",
       "DueDate": "2017-05-05T10:32",
       "Priority": "Medium"
-    },
-    {
-      "id": "86969992-bb26-46e4-94ad-b6232a448c85",
-      "CurrentState": "Pending",
-      "Title": "aaaaa",
-      "Description": "aaaaa",
-      "CreatedAt": "November 18, 2020",
-      "DueDate": "2020-11-06T19:40",
-      "Priority": "High"
-    },
-    {
-      "id": "bdf20a43-78ed-4bd9-8345-1000e4811814",
-      "CurrentState": "Pending",
-      "Title": "vvvv",
-      "Description": "vvvvvv",
-      "CreatedAt": "November 18, 2020",
-      "DueDate": "2020-11-05T19:42",
-      "Priority": "Medium"
-    },
-    {
-      "id": "1cb1980f-0ac5-45bd-8813-b319983253a1",
-      "CurrentState": "Pending",
-      "Title": "valid data",
-      "Description": "valid data Description",
-      "CreatedAt": "November 18, 2020",
-      "DueDate": "2015-01-01T21:10",
-      "Priority": "High"
-    },
-    {
-      "id": "26048e0d-e220-4aef-978d-3031b8b336cb",
-      "CurrentState": "Pending",
-      "Title": "momma 123 456",
-      "Description": "momma Description 12112 131321 000",
-      "CreatedAt": "November 18, 2020",
-      "DueDate": "2020-11-02T21:49",
-      "Priority": "Medium"
     }
   ]
 }

@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import { getTaskList, editTask } from '../actions/todo-actions';
+import { getTaskList, editTask, deleteTask } from '../actions/todo-actions';
 import TaskModal from '../components/add-task-form';
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
 import { Button } from '@material-ui/core';
 import moment from 'moment';
+import DeleteModal from './deleteModal';
 
 class ListPage extends Component {
     constructor(props) {
@@ -14,6 +15,7 @@ class ListPage extends Component {
         this.state = {
             openTaskReadOnlyModal: false,
             openEditTaskModal: false,
+            openDeleteModal: false,
             taskDataObject: {}
         }
     }
@@ -29,8 +31,15 @@ class ListPage extends Component {
 
     handleSubmit = (payload) => {
         console.log('handleSubmit payload for edit modal-->', payload);
-        this.props.editTask(payload)
-        this.setState({ openEditTaskModal: false })
+        if (this.state.openEditTaskModal) {
+            this.props.editTask(payload)
+            this.setState({ openEditTaskModal: false })
+        }
+        if (this.state.openDeleteModal) {
+            console.log('delete karo', this.state.taskDataObject);
+            this.props.deleteTask(this.state.taskDataObject.id)
+            this.setState({ openDeleteModal: false })
+        }
     }
 
     componentDidMount() {
@@ -64,7 +73,7 @@ class ListPage extends Component {
                                     <Button variant="contained" style={{ borderRadius: 5, background: 'rgb(69 173 93)', color: 'white', padding: 5, margin: 3}}>
                                         Done
                                     </Button>
-                                    <DeleteOutlineOutlinedIcon style={{ padding: 5, borderRadius: 5, background: '#cc1717', color: 'white', margin: 3 }}/>
+                                    <DeleteOutlineOutlinedIcon onClick={(e) => this.handleTrClick(e, dataLists, 'openDeleteModal')} style={{ padding: 5, borderRadius: 5, background: '#cc1717', color: 'white', margin: 3 }}/>
                                 </td>
                             </tr>
                         ))}
@@ -83,6 +92,11 @@ class ListPage extends Component {
                     taskDataObject={this.state.taskDataObject}
                     handleModalSubmit={this.handleSubmit}
                 />}
+                {this.state.openDeleteModal && <DeleteModal
+                    open={this.state.openDeleteModal}
+                    handleClose={() => this.setState({ openDeleteModal: false })}
+                    handleModalSubmit={this.handleSubmit}
+                />}
             </>
         )
     }
@@ -98,7 +112,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         getTaskList: () => dispatch(getTaskList()),
-        editTask: (payload) => dispatch(editTask(payload))
+        editTask: (payload) => dispatch(editTask(payload)),
+        deleteTask: (payload) => dispatch(deleteTask(payload))
     }
 };
 

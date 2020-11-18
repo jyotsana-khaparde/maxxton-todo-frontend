@@ -1,4 +1,4 @@
-import { GET_TASK_LIST, ADD_TASK, EDIT_TASK } from '../constants/actionTypes'
+import { GET_TASK_LIST, ADD_TASK, EDIT_TASK, DELETE_TASK } from '../constants/actionTypes'
 import axios from 'axios';
 
 export const getTaskList = () => {
@@ -37,5 +37,17 @@ export const editTask = (payload) => {
         .catch(error => {
           console.log('error-->', error)
         })
+  }
+}
+
+export const deleteTask = (id) => {
+  return (dispatch) => {
+    axios.delete(`http://localhost:3000/tasks/${id}`)
+    .then(res => {
+        console.log('deleteTask action---->',res.data)
+        dispatch({ type: DELETE_TASK, data: id })
+    }).catch(error => {
+        console.log(error);
+    });
   }
 }
