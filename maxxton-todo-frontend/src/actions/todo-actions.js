@@ -1,4 +1,4 @@
-import { GET_TASK_LIST } from '../constants/actionTypes'
+import { GET_TASK_LIST, ADD_TASK } from '../constants/actionTypes'
 import axios from 'axios';
 
 export const getTaskList = () => {
@@ -15,10 +15,11 @@ export const getTaskList = () => {
 }
 
 export const addTask = (payload) => {
-    return () => {
+    return (dispatch) => {
         axios.post('http://localhost:3000/tasks', payload)
           .then(res => {
             console.log('addTask action---->',res.data);
+            dispatch({ type: ADD_TASK, data: res.data})
           })
           .catch(error => {
               console.log('error-->', error)

@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
 import { Button } from '@material-ui/core';
 import Modal from '@material-ui/core/Modal';
-import { addTask } from '../actions/todo-actions';
 import moment from 'moment';
 const uuid = require('uuid');
 
@@ -26,7 +25,7 @@ class TaskModal extends Component {
         })
     }
 
-    handleSubmit = () => {
+    handleSubmit = (e) => {
         const payload = {
             id: uuid.v4(),
             CurrentState: 'Pending',
@@ -36,7 +35,8 @@ class TaskModal extends Component {
             DueDate: this.state.dueDate,
             Priority: this.state.priority
         }
-        this.props.addTask(payload)
+        this.props.handleModalSubmit(payload)
+        e.preventDefault()
     }
 
     render() {
@@ -103,7 +103,6 @@ class TaskModal extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        addTask: (payload) => dispatch(addTask(payload))
     }
 };
 

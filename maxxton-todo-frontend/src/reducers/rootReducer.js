@@ -1,4 +1,4 @@
-import { GET_TASK_LIST } from '../constants/actionTypes'
+import { GET_TASK_LIST, ADD_TASK } from '../constants/actionTypes'
 
 const initialState = {
     taskList: [],
@@ -11,6 +11,15 @@ const todoReducer = (state = initialState, action) => {
         return {
             ...state,
             taskList: action.data
+        }
+        case ADD_TASK:
+            console.log('ADD_TASK reducer---', action.data);
+            console.log('state reducer----', state)
+            let updatedDate = [...state.taskList, action.data]
+            console.log('updatedDate reducer----', updatedDate);
+        return {
+            ...state,
+            taskList: updatedDate
         }
         default: return state
     }

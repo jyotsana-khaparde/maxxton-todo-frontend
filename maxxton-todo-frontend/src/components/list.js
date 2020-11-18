@@ -5,6 +5,7 @@ import TaskModal from '../components/add-task-form';
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
 import { Button } from '@material-ui/core';
+import moment from 'moment';
 
 class ListPage extends Component {
     constructor(props) {
@@ -45,12 +46,12 @@ class ListPage extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.props.taskList.reverse().map(dataLists => (
+                        {(this.props.taskList && this.props.taskList.reverse() || []).map(dataLists => (
                             <tr key={dataLists.id} onClick={(e) => this.handleTrClick(e, dataLists, 'openTaskReadOnlyModal')}>
                                 <td style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8}}>{dataLists.Title}</td>
                                 <td style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8}}>{dataLists.Priority}</td>
-                                <td style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8}}>{dataLists.CreatedAt}</td>
-                                <td style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8}}>{dataLists.DueDate}</td>
+                                <td style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8}}>{moment(dataLists.CreatedAt).format("YYYY-DD-MM")}</td>
+                                <td style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8}}>{moment(dataLists.DueDate).format("YYYY-DD-MM")}</td>
                                 <td style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8, display: 'flex'}}>
                                     <EditOutlinedIcon style={{ padding: 5, borderRadius: 5, background: 'rgb(38, 131, 222)', color: 'white', margin: 3 }}
                                     onClick={(e) => this.handleTrClick(e, dataLists, 'openEditTaskModal')}/>
