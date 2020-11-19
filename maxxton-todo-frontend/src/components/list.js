@@ -86,7 +86,12 @@ class ListPage extends Component {
             seperateTabData = sortBy(this.state.sortBy, this.state.isAscending, seperateTabData)
         }
 
-
+        if (this.props.searchText) {
+            let filteredList = [...seperateTabData].filter((list) => {
+                return list.Title.toLowerCase().indexOf(this.props.searchText.toLowerCase()) !== -1;
+            })
+            seperateTabData = filteredList
+        }
 
         return (
             <>
