@@ -1,40 +1,24 @@
 {
   "tasks": [
     {
-      "id": 6,
+      "id": "6f47fd24-78eb-4815-83c7-63ba66e236be",
       "CurrentState": "Pending",
-      "Title": "my first title",
-      "Description": "my first Description",
-      "CreatedAt": "November 17, 2020",
-      "DueDate": "2017-05-12T10:30",
-      "Priority": "Medium"
-    },
-    {
-      "id": "aacfcfbe-30d0-4e97-99b1-0ea57ea24324",
-      "CurrentState": "Pending",
-      "Title": "second title",
-      "Description": "second Description",
-      "CreatedAt": "November 17, 2020",
-      "DueDate": "2017-05-05T10:32",
-      "Priority": "Medium"
-    },
-    {
-      "id": "9e8fd28c-e44a-4e79-a3da-c8f306565ebb",
-      "CurrentState": "Pending",
-      "Title": "my newly added task",
-      "Description": "my newly added task Description",
+      "Title": "check time",
+      "Description": "Description for check time",
       "CreatedAt": "November 19, 2020",
-      "DueDate": "2020-11-01T01:25",
-      "Priority": "None"
-    },
-    {
-      "id": "4623fc5e-a1d9-48e5-836b-a429a9063404",
-      "CurrentState": "Done",
-      "Title": "my second pask",
-      "Description": "my second pask",
-      "CreatedAt": "November 19, 2020",
-      "DueDate": "2020-11-05T01:25",
+      "DueDate": "2020-11-01",
+      "DueTime": "22:25",
       "Priority": "High"
+    },
+    {
+      "id": "faaa2e23-a8e6-438a-a98d-5a88a1e6fadd",
+      "CurrentState": "Pending",
+      "Title": "my timing time not given",
+      "Description": "Description if timing time not given",
+      "CreatedAt": "November 19, 2020",
+      "DueDate": "2020-11-01",
+      "DueTime": "",
+      "Priority": "Medium"
     }
   ]
 }

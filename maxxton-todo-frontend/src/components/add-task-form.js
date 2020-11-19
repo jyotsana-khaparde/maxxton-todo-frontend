@@ -15,6 +15,7 @@ class TaskModal extends Component {
             description: props.taskDataObject && props.taskDataObject.Description || '',
             dueDate: props.taskDataObject && props.taskDataObject.DueDate || '',
             priority: props.taskDataObject && props.taskDataObject.Priority || '',
+            dueTime: props.taskDataObject && props.taskDataObject.DueTime || '',
             isTitleError: true,
             isDescriptionError: true
         }
@@ -56,6 +57,7 @@ class TaskModal extends Component {
                 Description: this.state.description,
                 CreatedAt: this.props.taskDataObject.CreatedAt,
                 DueDate: this.state.dueDate,
+                DueTime: this.state.dueTime,
                 Priority: this.state.priority
             }
             console.log('payload inside Edit Task handleSubmit modal ->', payload);
@@ -68,6 +70,7 @@ class TaskModal extends Component {
                 Description: this.state.description,
                 CreatedAt: moment(new Date()).format("MMMM DD, YYYY"),
                 DueDate: this.state.dueDate,
+                DueTime: this.state.dueTime,
                 Priority: this.state.priority
             }
             console.log('payload inside Add Task handleSubmit modal ->', payload);
@@ -92,19 +95,33 @@ class TaskModal extends Component {
                 <label>Description</label><br/>
                 <textarea readOnly={this.props.heading === 'View Task'} name='description' value={this.state.description} onChange={this.handleChange} placeholder='Description' style={{padding: 5, margin: '6px 0px 6px 0px', width: 588, height: 100}} /><br/>
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <div>
-                        <label>Due Date</label><br/>
-                        <TextField
-                            style={{padding: 5, margin: '6px 0px 6px 0px'}}
-                            name='dueDate'
-                            id="datetime-local"
-                            type="datetime-local"
-                            value={this.state.dueDate}
-                            onChange={this.handleChange}
-                            InputProps={{
-                                readOnly: this.props.heading === 'View Task', // if it is view modal then only readOnly will be true
-                            }}
-                        />
+                    <div style={{ display: 'flex' }}>
+                        <div>
+                            <label>Due Date</label><br/>
+                            <TextField
+                                style={{padding: 5, margin: '6px 0px 6px 0px'}}
+                                name='dueDate'
+                                type="date"
+                                value={this.state.dueDate}
+                                onChange={this.handleChange}
+                                InputProps={{
+                                    readOnly: this.props.heading === 'View Task', // if it is view modal then only readOnly will be true
+                                }}
+                            />
+                        </div>
+                        <div>
+                            <label>Time</label><br/>
+                            <TextField
+                                style={{ marginTop: 11 }}
+                                name='dueTime'
+                                type="time"
+                                value={this.state.dueTime}
+                                onChange={this.handleChange}
+                                InputLabelProps={{
+                                shrink: true,
+                                }}
+                            />
+                        </div>
                     </div>
                     <div>
                         <label>Priority</label><br/>
