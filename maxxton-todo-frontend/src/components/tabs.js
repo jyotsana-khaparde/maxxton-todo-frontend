@@ -9,10 +9,15 @@ class TabsList extends Component {
         super(props)
         this.state = {
             value: 0,
-            searchText: ''
+            searchText: '',
+            groupBy: ''
         }
     }
 
+    handleGroupByChange = (event) => {
+        console.log('handleChange 1234 ---> ',event.target.name,  event.target.value);
+        this.setState({ [event.target.name]:  event.target.value})
+    }
     handleChange = (event, value) => {
         console.log('value ---> ', value);
         this.setState({ value })
@@ -27,11 +32,17 @@ class TabsList extends Component {
             <div style={{ display: 'flex', alignItems: 'center' }}>
                 <div style={{ width: '23%' }}>
                     <label>Group By</label><br/>
-                    <select disabled={this.props.heading === 'View Task'} name='priority' style={{padding: 5, margin: '15px 0px 0px 0px', width: '100%'}} value={this.state.priority} onChange={this.handleChange}>
-                        <option value="Low">Low</option>
-                        <option value="Medium">Medium</option>
-                        <option value="High">High</option>
+                    <select
+                        disabled={this.props.heading === 'View Task'}
+                        name='groupBy' 
+                        style={{padding: 5, margin: '15px 0px 0px 0px', width: '100%'}} 
+                        value={this.state.groupBy} 
+                        onChange={this.handleGroupByChange}
+                    >
                         <option value="None">None</option>
+                        <option value="Created On">Created On</option>
+                        <option value="Pending On">Pending On</option>
+                        <option value="Priority">Priority</option>
                     </select>
                 </div>
                 <SearchBar
