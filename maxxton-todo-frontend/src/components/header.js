@@ -27,7 +27,7 @@ class Header extends Component {
         const { openAddTaskModal } = this.state;
         return (
             <>
-            <div style={{ display: 'flex', justifyContent: 'space-around',
+            <div style={{ display: 'flex', justifyContent: 'space-between',
             alignItems: 'center' }}>
                 <h2>ToDo App</h2>
                 <div style={{ backgroundColor: '#2683de',

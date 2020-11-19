@@ -11,10 +11,10 @@ class Home extends Component {
 
     render() {
         return (
-            <>
+            <div style={{ margin: '4%' }}>
                 <Header/>
                 <Tabs/>
-            </>
+            </div>
         )
     }
 }
