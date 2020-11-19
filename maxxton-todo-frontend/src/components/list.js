@@ -7,6 +7,7 @@ import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined'
 import { Button } from '@material-ui/core';
 import moment from 'moment';
 import DeleteModal from './deleteModal';
+import UnfoldMoreIcon from '@material-ui/icons/UnfoldMore';
 
 class ListPage extends Component {
     constructor(props) {
@@ -73,11 +74,36 @@ class ListPage extends Component {
                 <table style={{fontFamily: 'arial, sans-serif', borderCollapse: 'collapse', width: '100%', marginTop: 10}}>
                     <thead>
                         <tr>
-                            <th style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8}}>Summary</th>
-                            <th style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8}}>Priority</th>
-                            <th style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8}}>Created On</th>
-                            <th style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8}}>Due Date</th>
-                            <th style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8}}>Actions</th>
+                            <th style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8}}>
+                                <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
+                                    <span>Summary</span> 
+                                    <UnfoldMoreIcon style={{ padding: 2, borderRadius: 5, background: 'rgb(38, 131, 222)', color: 'white', margin: 3 }}/>
+                                </div>
+                            </th>
+                            <th style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8}}>
+                                <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
+                                    <span>Priority</span>
+                                    <UnfoldMoreIcon style={{ padding: 2, borderRadius: 5, background: 'rgb(38, 131, 222)', color: 'white', margin: 3 }}/>
+                                </div>
+                            </th>
+                            <th style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8}}>
+                                <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
+                                    <span>Created On</span>
+                                    <UnfoldMoreIcon style={{ padding: 2, borderRadius: 5, background: 'rgb(38, 131, 222)', color: 'white', margin: 3 }}/>
+                                </div>
+                            </th>
+                            <th style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8}}>
+                                <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
+                                    <span>Due Date</span>
+                                    <UnfoldMoreIcon style={{ padding: 2, borderRadius: 5, background: 'rgb(38, 131, 222)', color: 'white', margin: 3 }}/>
+                                </div>
+                            </th>
+                            <th style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8}}>
+                                <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
+                                    <span>Actions</span>
+                                    <UnfoldMoreIcon style={{ padding: 2, borderRadius: 5, background: 'rgb(38, 131, 222)', color: 'white', margin: 3 }}/>
+                                </div>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
