@@ -21,7 +21,7 @@ class ListPage extends Component {
             taskDataObject: {},
             updateCurrentState: false,
             isAscending: true,
-            sortBy: 'Title'
+            sortBy: ''
         }
     }
 
@@ -81,8 +81,11 @@ class ListPage extends Component {
             let completedFilterData = [...this.props.taskList]
             seperateTabData = completedFilterData.filter(completedFilterData => completedFilterData.CurrentState === 'Pending') 
         }
+        if (this.state.sortBy) {
+            console.log('---------sort har de-------');
+            seperateTabData = sortBy(this.state.sortBy, this.state.isAscending, seperateTabData)
+        }
 
-        seperateTabData = sortBy(this.state.sortBy, this.state.isAscending, seperateTabData)
 
 
         return (
@@ -132,7 +135,7 @@ class ListPage extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {(seperateTabData && seperateTabData.reverse() || []).map(dataLists => (
+                        {(seperateTabData || []).map(dataLists => (
                             <tr key={dataLists.id} onClick={(e) => this.handleTrClick(e, dataLists, 'openTaskReadOnlyModal')}>
                                 <td style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8, textDecoration: dataLists.CurrentState === 'Done' ? 'line-through' : 'none'}}>
                                     {dataLists.Title}

@@ -15,9 +15,13 @@ const todoReducer = (state = initialState, action) => {
         }
         case ADD_TASK:
             console.log('ADD_TASK reducer---', action.data);
-            console.log('state reducer----', state)
             let updatedDate = [...state.taskList, action.data]
             console.log('updatedDate reducer----', updatedDate);
+            updatedDate.sort((a, b) => {
+                let da = new Date(a.CreatedAt);
+                let db = new Date(b.CreatedAt);
+                return db - da;
+            });
         return {
             ...state,
             taskList: updatedDate

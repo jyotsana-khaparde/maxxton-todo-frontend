@@ -68,7 +68,7 @@ class TaskModal extends Component {
                 CurrentState: 'Pending',
                 Title: this.state.title,
                 Description: this.state.description,
-                CreatedAt: moment(new Date()).format("MMMM DD, YYYY"),
+                CreatedAt: new Date(),
                 DueDate: this.state.dueDate,
                 DueTime: this.state.dueTime,
                 Priority: this.state.priority
