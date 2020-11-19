@@ -8,6 +8,7 @@ import { Button } from '@material-ui/core';
 import moment from 'moment';
 import DeleteModal from './deleteModal';
 import UnfoldMoreIcon from '@material-ui/icons/UnfoldMore';
+import { sortBy } from '../constants/sortBy';
 
 class ListPage extends Component {
     constructor(props) {
@@ -18,7 +19,9 @@ class ListPage extends Component {
             openEditTaskModal: false,
             openDeleteModal: false,
             taskDataObject: {},
-            updateCurrentState: false
+            updateCurrentState: false,
+            isAscending: true,
+            sortBy: 'Title'
         }
     }
 
@@ -51,24 +54,37 @@ class ListPage extends Component {
         }
     }
 
+    handleOrder = (key) => {
+        console.log('this.props.tabNumber-----', key)
+        this.setState({
+            isAscending: !this.state.isAscending,
+            sortBy: key
+        })
+    }
+
     componentDidMount() {
         this.props.getTaskList()
     }
 
     render() {
         console.log('taskList:- ',this.props.tabNumber, this.props.taskList);
+        console.log('isAscending-------', this.state.isAscending, this.state.sortBy)
         let seperateTabData = []
-        if(this.props.tabNumber === 0) {
+        if (this.props.tabNumber === 0) {
             seperateTabData = [...this.props.taskList]
         }
-        if(this.props.tabNumber === 1) {
+        if (this.props.tabNumber === 1) {
             let completedFilterData = [...this.props.taskList]
             seperateTabData = completedFilterData.filter(completedFilterData => completedFilterData.CurrentState === 'Done')
         }
-        if(this.props.tabNumber === 2) {
+        if (this.props.tabNumber === 2) {
             let completedFilterData = [...this.props.taskList]
             seperateTabData = completedFilterData.filter(completedFilterData => completedFilterData.CurrentState === 'Pending') 
         }
+
+        seperateTabData = sortBy(this.state.sortBy, this.state.isAscending, seperateTabData)
+
+
         return (
             <>
                 <table style={{fontFamily: 'arial, sans-serif', borderCollapse: 'collapse', width: '100%', marginTop: 10}}>
@@ -77,32 +93,41 @@ class ListPage extends Component {
                             <th style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8}}>
                                 <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
                                     <span>Summary</span> 
-                                    <UnfoldMoreIcon style={{ padding: 2, borderRadius: 5, background: 'rgb(38, 131, 222)', color: 'white', margin: 3 }}/>
+                                    <UnfoldMoreIcon
+                                        onClick={() => this.handleOrder('Title')}
+                                        style={{ padding: 2, borderRadius: 5, background: 'rgb(38, 131, 222)', color: 'white', margin: 3 }}
+                                    />
                                 </div>
                             </th>
                             <th style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8}}>
                                 <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
                                     <span>Priority</span>
-                                    <UnfoldMoreIcon style={{ padding: 2, borderRadius: 5, background: 'rgb(38, 131, 222)', color: 'white', margin: 3 }}/>
+                                    <UnfoldMoreIcon
+                                        onClick={() => this.handleOrder('Priority')}
+                                        style={{ padding: 2, borderRadius: 5, background: 'rgb(38, 131, 222)', color: 'white', margin: 3 }}
+                                    />
                                 </div>
                             </th>
                             <th style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8}}>
                                 <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
                                     <span>Created On</span>
-                                    <UnfoldMoreIcon style={{ padding: 2, borderRadius: 5, background: 'rgb(38, 131, 222)', color: 'white', margin: 3 }}/>
+                                    <UnfoldMoreIcon
+                                        onClick={() => this.handleOrder('CreatedAt')}
+                                        style={{ padding: 2, borderRadius: 5, background: 'rgb(38, 131, 222)', color: 'white', margin: 3 }}
+                                    />
                                 </div>
                             </th>
                             <th style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8}}>
                                 <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
                                     <span>Due Date</span>
-                                    <UnfoldMoreIcon style={{ padding: 2, borderRadius: 5, background: 'rgb(38, 131, 222)', color: 'white', margin: 3 }}/>
+                                    <UnfoldMoreIcon
+                                        onClick={() => this.handleOrder('DueDate')}
+                                        style={{ padding: 2, borderRadius: 5, background: 'rgb(38, 131, 222)', color: 'white', margin: 3 }}
+                                    />
                                 </div>
                             </th>
                             <th style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8}}>
-                                <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
-                                    <span>Actions</span>
-                                    <UnfoldMoreIcon style={{ padding: 2, borderRadius: 5, background: 'rgb(38, 131, 222)', color: 'white', margin: 3 }}/>
-                                </div>
+                                <span>Actions</span>
                             </th>
                         </tr>
                     </thead>
