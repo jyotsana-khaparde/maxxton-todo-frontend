@@ -14,7 +14,24 @@ class TaskModal extends Component {
             title: props.taskDataObject && props.taskDataObject.Title || '',
             description: props.taskDataObject && props.taskDataObject.Description || '',
             dueDate: props.taskDataObject && props.taskDataObject.DueDate || '',
-            priority: props.taskDataObject && props.taskDataObject.Priority || ''
+            priority: props.taskDataObject && props.taskDataObject.Priority || '',
+            isTitleError: true,
+            isDescriptionError: true
+        }
+    }
+
+    validator = (key, value) => {
+        console.log('validator--->', key, value);
+        if ((key === 'title' && value && value.length > 140) || (key === 'title' && value && value.length < 10)) {
+            this.setState({ isTitleError: true })
+        } else {
+            this.setState({ isTitleError: false })
+        }
+
+        if ((key === 'description' && value && value.length > 500) || (key === 'description' && value && value.length < 10)) {
+            this.setState({ isDescriptionError: true })
+        } else {
+            this.setState({ isDescriptionError: false })
         }
     }
 
@@ -22,6 +39,9 @@ class TaskModal extends Component {
         console.log('handleChange ---',event.target.name, event.target.value);
         this.setState({
             [event.target.name]: event.target.value
+        },
+        () => {
+          this.validator(event.target.name, event.target.value);
         })
     }
 
@@ -68,7 +88,7 @@ class TaskModal extends Component {
               <h3>{this.props.heading}</h3>  
             <form onSubmit={this.handleSubmit}>
                 <label>Title</label><br/>
-                <input readOnly={this.props.heading === 'View Task'} name='title' value={this.state.title} onChange={this.handleChange} placeholder='Title' style={{padding: 5, margin: '6px 0px 6px 0px', width: 588}} /><br/>
+                <input readOnly={this.props.heading === 'View Task'} name='title' value={this.state.title} onChange={this.handleChange} placeholder='Title' style={{padding: 5, margin: '6px 0px 6px 0px', width: 588 }} /><br/>
                 <label>Description</label><br/>
                 <textarea readOnly={this.props.heading === 'View Task'} name='description' value={this.state.description} onChange={this.handleChange} placeholder='Description' style={{padding: 5, margin: '6px 0px 6px 0px', width: 588, height: 100}} /><br/>
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -100,9 +120,17 @@ class TaskModal extends Component {
                     <Button type="submit" variant="contained" style={{padding: 5, margin: 4, color: 'white', background: 'grey'}} onClick={this.props.handleClose}>
                         Cancel
                     </Button>
-                    {this.props.heading !== 'View Task' && <Button type="submit" variant="contained" style={{background: 'rgb(69 173 93)', color: 'white', padding: 5, margin: 4}}>
-                        Save
-                    </Button>}
+                    {
+                        this.props.heading !== 'View Task' &&
+                        <Button 
+                            type="submit"
+                            variant="contained" 
+                            style={{background: (this.state.isTitleError || this.state.isDescriptionError) ? 'grey' : 'rgb(69 173 93)', color: 'white', padding: 5, margin: 4}}
+                            disabled={this.state.isTitleError || this.state.isDescriptionError} 
+                        >
+                            Save
+                        </Button>
+                    }
                 </div>
             </form>
             </div>
