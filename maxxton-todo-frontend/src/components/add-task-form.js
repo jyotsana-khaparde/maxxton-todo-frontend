@@ -126,6 +126,7 @@ class TaskModal extends Component {
                     <div>
                         <label>Priority</label><br/>
                         <select disabled={this.props.heading === 'View Task'} name='priority' style={{padding: 5, margin: '15px 0px 0px 0px', width: 294}} value={this.state.priority} onChange={this.handleChange}>
+                            <option style={{ display:'none' }}/>
                             <option value="Low">Low</option>
                             <option value="Medium">Medium</option>
                             <option value="High">High</option>
