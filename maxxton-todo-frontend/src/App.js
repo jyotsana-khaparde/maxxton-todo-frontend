@@ -1,6 +1,6 @@
 import { Provider } from 'react-redux'; // provide redux store to react component
-import Home from './components/home';
-import store from './constants/store';
+import Home from './components/homePage/home';
+import store from './redux/store';
 
 function App() {
   return (
