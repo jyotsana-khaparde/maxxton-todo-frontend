@@ -7,7 +7,6 @@ const GroupByComponent = (props) => {
     const [groupByKey, setGroupByKey] = useState('')
 
     const handleGroupByChange = (event) => {
-        console.log('handleChange 1234 ---> ', event.target.value);
         setGroupByKey(event.target.value)
         props.handleGroupByChange(event.target.value)
     }

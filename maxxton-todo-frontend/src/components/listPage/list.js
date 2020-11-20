@@ -27,12 +27,9 @@ class ListPage extends Component {
     }
 
     handleTrClick = (e, dataLists, key) => {
-        console.log('dataLists:-----', dataLists);
         e.stopPropagation()
         if (key === 'updateCurrentState') {
-            console.log('Current State update karo->', dataLists);
             dataLists['CurrentState'] === 'Pending' ? dataLists['CurrentState'] = 'Done' : dataLists['CurrentState'] = 'Pending'; 
-            console.log('updated current state->', dataLists);
             this.props.editTask(dataLists)
         } else {
             this.setState({
@@ -43,20 +40,17 @@ class ListPage extends Component {
     }
 
     handleSubmit = (payload) => {
-        console.log('handleSubmit payload for edit modal-->', payload);
         if (this.state.openEditTaskModal) {
             this.props.editTask(payload)
             this.setState({ openEditTaskModal: false })
         }
         if (this.state.openDeleteModal) {
-            console.log('delete karo', this.state.taskDataObject);
             this.props.deleteTask(this.state.taskDataObject.id)
             this.setState({ openDeleteModal: false })
         }
     }
 
     handleOrder = (key) => {
-        console.log('this.props.tabNumber-----', key)
         this.setState({
             isAscending: !this.state.isAscending,
             sortBy: key,
@@ -70,9 +64,6 @@ class ListPage extends Component {
 
     render() {
         const { classes } = this.props;
-        console.log('taskList:- ',this.props.tabNumber, this.props.taskList);
-        console.log('isAscending-------', this.state.isAscending, this.state.sortBy)
-        console.log('this.state.isnewTaskAdded--------', this.props.isnewTaskAdded);
         let seperateTabData = []
         let groupByObject = {}
         if (this.props.tabNumber === 0) {
@@ -87,7 +78,6 @@ class ListPage extends Component {
             seperateTabData = completedFilterData.filter(completedFilterData => completedFilterData.CurrentState === 'Pending') 
         }
         if (this.state.sortBy && !this.props.isnewTaskAdded) {
-            console.log('---------sort har de-------');
             seperateTabData = sortByMapping(this.state.sortBy, this.state.isAscending, seperateTabData)
         }
 
@@ -99,9 +89,7 @@ class ListPage extends Component {
         }
 
         if(this.props.groupByKey) {
-            console.log('this.props.groupByKey-----', this.props.groupByKey);
             groupByObject = groupByMapping(seperateTabData, this.props.groupByKey);
-            console.log('groupByObject-----', groupByObject)
         }
 
 
@@ -231,7 +219,6 @@ class ListPage extends Component {
 }
 
 const mapStateToProps = state => {
-    console.log('state.todoReducer-----', state.taskList);
     return {
         taskList: state.taskList
     }

@@ -9,7 +9,6 @@ const uuid = require('uuid');
 class TaskModal extends Component {
     constructor(props) {
         super(props)
-        console.log('TaskModal props--->', props);
         this.state = {
             title: (props.taskDataObject && props.taskDataObject.Title) || '',
             description: (props.taskDataObject && props.taskDataObject.Description) || '',
@@ -22,7 +21,6 @@ class TaskModal extends Component {
     }
 
     validator = (key, value) => {
-        console.log('validator--->', key, value);
         if ((key === 'title' && value && value.length > 140) || (key === 'title' && value && value.length < 10)) {
             this.setState({ isTitleError: true })
         } else {
@@ -37,7 +35,6 @@ class TaskModal extends Component {
     }
 
     handleChange = (event) => {
-        console.log('handleChange ---',event.target.name, event.target.value);
         this.setState({
             [event.target.name]: event.target.value
         },
@@ -48,7 +45,6 @@ class TaskModal extends Component {
 
     handleSubmit = (e) => {
         let payload;
-        console.log('this.props.heading----', this.props.heading, typeof this.props.heading);
         if (this.props.heading === 'Edit Task') {
             payload = {
                 id: this.props.taskDataObject.id,
@@ -60,7 +56,6 @@ class TaskModal extends Component {
                 DueTime: this.state.dueTime,
                 Priority: this.state.priority
             }
-            console.log('payload inside Edit Task handleSubmit modal ->', payload);
         }
         if (this.props.heading === 'Add Task') {
             payload = {
@@ -73,7 +68,6 @@ class TaskModal extends Component {
                 DueTime: this.state.dueTime,
                 Priority: this.state.priority
             }
-            console.log('payload inside Add Task handleSubmit modal ->', payload);
         }
         this.props.handleModalSubmit(payload)
         e.preventDefault()

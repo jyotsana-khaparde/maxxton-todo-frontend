@@ -1,9 +1,6 @@
 import moment from 'moment';
 
 export const sortByMapping = (sortBy, isAscending, listData) => {
-    console.log('1----sortBy---> ', sortBy);
-    console.log('1----isAscending---> ', isAscending);
-    console.log('1----listData---> ', listData);
     let data = [...listData]
     if (sortBy === 'Title' || sortBy === 'Priority') {
         if (isAscending) {
@@ -20,7 +17,6 @@ export const sortByMapping = (sortBy, isAscending, listData) => {
                 return 0;
             });
 
-            console.log('12----isAscending-true--->', data)
             return data;
             
         } else {
@@ -37,7 +33,6 @@ export const sortByMapping = (sortBy, isAscending, listData) => {
                 return 0;
             });
             
-            console.log('12----sAscending-false--->', data)
             return data;
         }
     }
@@ -49,7 +44,6 @@ export const sortByMapping = (sortBy, isAscending, listData) => {
                 let dateb = new Date(b[sortBy]);
                 return dateb - datea;
             });
-            console.log('12----sAscending-true--->', data)
             return data;
         } else {
             data.sort((a, b) => {
@@ -57,7 +51,6 @@ export const sortByMapping = (sortBy, isAscending, listData) => {
                 let dateb = new Date(b[sortBy]);
                 return datea - dateb;
             });
-            console.log('12----sAscending-false--->', data)
             return data;
         }
     }
@@ -65,8 +58,6 @@ export const sortByMapping = (sortBy, isAscending, listData) => {
 
 
 export const groupByMapping = (listData, groupByKey) => {
-    console.log('listData ------>',listData);
-    console.log('groupByKey ------>',groupByKey);
     
     let allPossibleGroupByKey = []
     let uniqueValueArray = []
@@ -76,7 +67,6 @@ export const groupByMapping = (listData, groupByKey) => {
     listData.map(listarrays => {
         allPossibleGroupByKey.push(listarrays[groupByKey])
     })
-    console.log('allPossibleGroupByKey------', allPossibleGroupByKey);
 
     if (groupByKey === 'CreatedAt') {
         let formattedCreatedAtArray = []
@@ -85,22 +75,17 @@ export const groupByMapping = (listData, groupByKey) => {
         })
         // find unique values 
         uniqueValueArray = [...new Set(formattedCreatedAtArray)];
-        console.log('uniqueValueArray-----', uniqueValueArray)
         uniqueValueArray.map(uniqueValue => {
             let filteredData = listData.filter(listData => moment(listData[groupByKey]).format("YYYY-MM-DD") === uniqueValue)
-            console.log('filteredData-----', filteredData)
             newListObject[uniqueValue] = filteredData
         })
     } else {
         uniqueValueArray = [...new Set(allPossibleGroupByKey)];
-        console.log('uniqueValueArray-----', uniqueValueArray)
         uniqueValueArray.map(uniqueValue => {
             let filteredData = listData.filter(listData => listData[groupByKey] === uniqueValue)
-            console.log('filteredData-----', filteredData)
             groupByKey === 'DueDate' && !uniqueValue ? newListObject["No Due Date"] = filteredData : newListObject[uniqueValue] = filteredData
         })
     }
 
-      console.log('newListObject-----', newListObject)
       return newListObject;
 }

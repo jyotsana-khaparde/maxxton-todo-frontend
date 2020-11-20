@@ -7,7 +7,6 @@ const SearchBar = (props) => {
     const [searchedValue, setSearchedValue] = useState('')
 
     const handleSearchValue = (e) => {
-        console.log('handleSearchValue-> ', e.target.value);
         setSearchedValue(e.target.value)
         props.handleSearchBarValue(e.target.value)
     }

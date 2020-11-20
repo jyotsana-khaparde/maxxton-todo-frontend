@@ -12,12 +12,10 @@ const Header = (props) => {
     const dispatch = useDispatch()
 
     const handleAddTask = () => {
-        console.log('added-------')
         setOpenAddTaskModal(true)
     }
 
     const handleSubmit = (payload) => {
-        console.log('handleSubmit payload---', payload)
         dispatch(addTask(payload))
         setOpenAddTaskModal(false)
         props.handleIsnewTaskAdded(true)

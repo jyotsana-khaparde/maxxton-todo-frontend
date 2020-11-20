@@ -20,20 +20,16 @@ class TabsList extends Component {
     }
 
     handleIsnewTaskAdded = (value) => {
-        console.log('handleIsnewTaskAdded ---> ', value)
         this.setState({ isnewTaskAdded: value})
     }
 
     handleGroupByChange = (value) => {
-        console.log('handleGroupByChange ---> ', value)
         this.setState({ selectedgroupByValue:  value})
     }
     handleTabChange = (event, value) => {
-        console.log('handleGroupByChange ---> ', value)
         this.setState({ selectedTab: value })
     }
     handleSearchBarValue = (value) => {
-        console.log('handleSearchBarValue ---> ', value)
         this.setState({ searchedText: value })
     }
 
