@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
+import { withStyles } from '@material-ui/core';
 import { getTaskList, editTask, deleteTask } from '../../redux/actionCreator';
-import TaskModal from '../taskModalComponent/add-task-form';
+import TaskModal from '../taskModalComponent/taskModal';
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
 import { Button } from '@material-ui/core';
@@ -9,6 +10,7 @@ import moment from 'moment';
 import DeleteModal from '../deleteModalComponent/deleteModal';
 import UnfoldMoreIcon from '@material-ui/icons/UnfoldMore';
 import { sortByMapping, groupByMapping } from '../../constant/utils';
+import styles from './list.style';
 
 class ListPage extends Component {
     constructor(props) {
@@ -67,6 +69,7 @@ class ListPage extends Component {
     }
 
     render() {
+        const { classes } = this.props;
         console.log('taskList:- ',this.props.tabNumber, this.props.taskList);
         console.log('isAscending-------', this.state.isAscending, this.state.sortBy)
         console.log('this.state.isnewTaskAdded--------', this.props.isnewTaskAdded);
@@ -116,7 +119,7 @@ class ListPage extends Component {
                 <td style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8, textDecoration: dataLists.CurrentState === 'Done' ? 'line-through' : 'none'}}>
                     {((!dataLists.DueDate && !dataLists.DueTime) || (!dataLists.DueDate && dataLists.DueTime)) ? null : moment(dataLists.DueDate).format("YYYY-MM-DD") +"  "+ dataLists.DueTime}
                 </td>
-                <td style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8}}>
+                <td className={classes.tableHeading}>
                     <div style={{display: 'flex'}}>
                         <EditOutlinedIcon
                             style={{ padding: 5, borderRadius: 5, background: 'rgb(38, 131, 222)', color: 'white', margin: 3 }}
@@ -140,10 +143,10 @@ class ListPage extends Component {
 
         return (
             <>
-                <table style={{fontFamily: 'arial, sans-serif', borderCollapse: 'collapse', width: '100%', marginTop: 10}}>
+                <table className={classes.table}>
                     <thead>
                         <tr>
-                            <th style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8}}>
+                            <th className={classes.tableHeading}>
                                 <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
                                     <span>Summary</span> 
                                     <UnfoldMoreIcon
@@ -152,7 +155,7 @@ class ListPage extends Component {
                                     />
                                 </div>
                             </th>
-                            <th style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8}}>
+                            <th className={classes.tableHeading}>
                                 <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
                                     <span>Priority</span>
                                     <UnfoldMoreIcon
@@ -161,7 +164,7 @@ class ListPage extends Component {
                                     />
                                 </div>
                             </th>
-                            <th style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8}}>
+                            <th className={classes.tableHeading}>
                                 <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
                                     <span>Created On</span>
                                     <UnfoldMoreIcon
@@ -170,7 +173,7 @@ class ListPage extends Component {
                                     />
                                 </div>
                             </th>
-                            <th style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8}}>
+                            <th className={classes.tableHeading}>
                                 <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
                                     <span>Due Date</span>
                                     <UnfoldMoreIcon
@@ -179,7 +182,7 @@ class ListPage extends Component {
                                     />
                                 </div>
                             </th>
-                            <th style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8}}>
+                            <th className={classes.tableHeading}>
                                 <span>Actions</span>
                             </th>
                         </tr>
@@ -188,9 +191,9 @@ class ListPage extends Component {
                         this.props.groupByKey ?
                         Object.keys(groupByObject).map((key, i) => (
                             <tbody key={i}>
-                                 <tr style={{ textAlign: 'center' }}>
-                                    <div style={{ position: 'relative', left: 530, padding: 5 }}>
-                                        <span style={{fontWeight: 'bold', borderBottom: '1px solid grey'}}>{key}</span>
+                                 <tr className={classes.singleTR}>
+                                    <div className={classes.rowHeadingDiv}>
+                                        <span className={classes.rowHeading}>{key}</span>
                                     </div>
                                 </tr>
                                 {(groupByObject[key] || []).map(dataLists => listShow(dataLists))}
@@ -239,4 +242,4 @@ const mapDispatchToProps = dispatch => {
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ListPage);
+export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(ListPage));

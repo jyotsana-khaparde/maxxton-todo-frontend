@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
+import { withStyles } from '@material-ui/core';
+import styles from './search.style';
 
 const SearchBar = (props) => {
+    const { classes } = props;
     const [searchedValue, setSearchedValue] = useState('')
 
     const handleSearchValue = (e) => {
@@ -11,16 +14,16 @@ const SearchBar = (props) => {
 
     return (
         <div>
-            <label style={{ margin: '15px 0px 0px 90px' }}>Search</label><br/>
+            <label className={classes.label}>Search</label><br/>
             <input
                 value={searchedValue}
                 type='text'
                 placeholder='Search Tasks'
-                style={{ width: '380%', height: 25, margin: '15px 0px 0px 90px' }}
+                className={classes.searchInput}
                 onChange={handleSearchValue}
             />
         </div>
     )
 }
 
-export default SearchBar;
+export default withStyles(styles)(SearchBar);

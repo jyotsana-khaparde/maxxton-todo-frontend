@@ -1,67 +1,48 @@
-import React, {Component} from 'react';
-import { connect } from 'react-redux';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { withStyles } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
-import TaskModal from '../taskModalComponent/add-task-form';
+import TaskModal from '../taskModalComponent/taskModal';
 import { addTask } from '../../redux/actionCreator';
+import styles from './header.style';
 
-class Header extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            openAddTaskModal: false
-        }
-    }
+const Header = (props) => {
+    const { classes } = props;
+    const [openAddTaskModal, setOpenAddTaskModal] = useState(false)
+    const dispatch = useDispatch()
 
-    handleAddTask = () => {
+    const handleAddTask = () => {
         console.log('added-------')
-        this.setState({ openAddTaskModal: true })
+        setOpenAddTaskModal(true)
     }
 
-    handleSubmit = (payload) => {
+    const handleSubmit = (payload) => {
         console.log('handleSubmit payload---', payload)
-        this.props.addTask(payload)
-        this.setState({ openAddTaskModal: false })
-        this.props.handleIsnewTaskAdded(true)
+        dispatch(addTask(payload))
+        setOpenAddTaskModal(false)
+        props.handleIsnewTaskAdded(true)
     }
 
-    render() {
-        const { openAddTaskModal } = this.state;
-        return (
-            <>
-            <div style={{ display: 'flex', justifyContent: 'space-between',
-            alignItems: 'center' }}>
-                <h2>ToDo App</h2>
-                <div style={{ backgroundColor: '#2683de',
-                                width: 50,
-                                height: 50,
-                                borderRadius: 35,
-                                border: 'none',
-                                boxShadow: '1px 1px 4px 1px',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center' }}
-                    onClick={this.handleAddTask}>
-                    <AddIcon style={{ color: 'white' }}/>
-                </div>
+    return (
+        <>
+        <div className={classes.container}>
+            <h2>ToDo App</h2>
+            <div className={classes.addIcon}
+                onClick={handleAddTask}>
+                <AddIcon style={{ color: 'white' }}/>
             </div>
-            {
-                openAddTaskModal && 
-                <TaskModal
-                    open={openAddTaskModal}
-                    handleClose={() => this.setState({ openAddTaskModal: false})}
-                    heading={'Add Task'}
-                    handleModalSubmit={this.handleSubmit}
-                />
-            }
-            </>
-        )
-    }
+        </div>
+        {
+            openAddTaskModal && 
+            <TaskModal
+                open={openAddTaskModal}
+                handleClose={() => setOpenAddTaskModal(false)}
+                heading={'Add Task'}
+                handleModalSubmit={handleSubmit}
+            />
+        }
+        </>
+    )
 }
 
-const mapDispatchToProps = dispatch => {
-    return {
-        addTask: (payload) => dispatch(addTask(payload))
-    }
-};
-
-export default connect(null, mapDispatchToProps)(Header);
+export default withStyles(styles)(Header);

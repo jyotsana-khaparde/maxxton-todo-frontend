@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/core';
 import styles from './deleteModal.styles';
 
 function DeleteModal(props) {
-    const { classes } = props
+    const { classes } = props;
 
     const handleSubmit = (e) => {
         props.handleModalSubmit()

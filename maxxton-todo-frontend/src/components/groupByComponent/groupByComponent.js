@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
+import { withStyles } from '@material-ui/core';
+import styles from './groupBy.styles';
 
 const GroupByComponent = (props) => {
+    const { classes } = props;
     const [groupByKey, setGroupByKey] = useState('')
 
     const handleGroupByChange = (event) => {
@@ -10,12 +13,12 @@ const GroupByComponent = (props) => {
     }
 
     return (
-        <div style={{ width: '23%' }}>
+        <div className={classes.container}>
             <label>Group By</label><br/>
             <select
                 disabled={props.heading === 'View Task'}
                 name='groupByKey' 
-                style={{padding: 5, margin: '15px 0px 0px 0px', width: '100%'}} 
+                className={classes.selectOption} 
                 value={groupByKey} 
                 onChange={handleGroupByChange}
             >
@@ -28,4 +31,4 @@ const GroupByComponent = (props) => {
     )
 }
 
-export default GroupByComponent;
+export default withStyles(styles)(GroupByComponent);

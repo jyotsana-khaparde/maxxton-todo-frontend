@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { withStyles } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import { Button } from '@material-ui/core';
 import Modal from '@material-ui/core/Modal';
+import styles from './taskModal.style';
 const uuid = require('uuid');
 
 class TaskModal extends Component {
@@ -78,26 +80,35 @@ class TaskModal extends Component {
     }
 
     render() {
+        const { classes } = this.props
         const body = (
-            <div style={{
-                position: 'absolute',
-                width: 600,
-                backgroundColor: 'white',
-                margin: '160px 0px 0px 400px',
-                padding: 10
-            }}>
+            <div className={classes.modalContainer}>
               <h3>{this.props.heading}</h3>  
             <form onSubmit={this.handleSubmit}>
                 <label>Title</label><br/>
-                <input readOnly={this.props.heading === 'View Task'} name='title' value={this.state.title} onChange={this.handleChange} placeholder='Title' style={{padding: 5, margin: '6px 0px 6px 0px', width: 588 }} /><br/>
+                <input
+                    readOnly={this.props.heading === 'View Task'}
+                    name='title' 
+                    value={this.state.title} 
+                    onChange={this.handleChange} 
+                    placeholder='Title' 
+                    className={classes.title} 
+                /><br/>
                 <label>Description</label><br/>
-                <textarea readOnly={this.props.heading === 'View Task'} name='description' value={this.state.description} onChange={this.handleChange} placeholder='Description' style={{padding: 5, margin: '6px 0px 6px 0px', width: 588, height: 100}} /><br/>
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <div style={{ display: 'flex' }}>
+                <textarea
+                    readOnly={this.props.heading === 'View Task'} 
+                    name='description' 
+                    value={this.state.description} 
+                    onChange={this.handleChange} 
+                    placeholder='Description' 
+                    className={classes.description} 
+                /><br/>
+                <div className={classes.textFieldDiv}>
+                    <div className={classes.innerInput}>
                         <div>
                             <label>Due Date</label><br/>
                             <TextField
-                                style={{padding: 5, margin: '6px 0px 6px 0px'}}
+                                className={classes.dueDate}
                                 name='dueDate'
                                 type="date"
                                 value={this.state.dueDate}
@@ -110,7 +121,7 @@ class TaskModal extends Component {
                         <div>
                             <label>Time</label><br/>
                             <TextField
-                                style={{ marginTop: 11 }}
+                                className={classes.dueTime}
                                 name='dueTime'
                                 type="time"
                                 value={this.state.dueTime}
@@ -123,7 +134,13 @@ class TaskModal extends Component {
                     </div>
                     <div>
                         <label>Priority</label><br/>
-                        <select disabled={this.props.heading === 'View Task'} name='priority' style={{padding: 5, margin: '15px 0px 0px 0px', width: 294}} value={this.state.priority} onChange={this.handleChange}>
+                        <select
+                            disabled={this.props.heading === 'View Task'} 
+                            name='priority' 
+                            className={classes.select}
+                            value={this.state.priority} 
+                            onChange={this.handleChange}
+                        >
                             <option style={{ display:'none' }}/>
                             <option value="None">None</option>
                             <option value="Low">Low</option>
@@ -132,8 +149,13 @@ class TaskModal extends Component {
                         </select>
                     </div>
                 </div>
-                <div style={{textAlign: 'end'}}>
-                    <Button type="submit" variant="contained" style={{padding: 5, margin: 4, color: 'white', background: 'grey'}} onClick={this.props.handleClose}>
+                <div className={classes.buttonContainer}>
+                    <Button 
+                        type="submit" 
+                        variant="contained" 
+                        className={classes.cancelButton} 
+                        onClick={this.props.handleClose}
+                    >
                         Cancel
                     </Button>
                     {
@@ -162,4 +184,4 @@ class TaskModal extends Component {
     }
 }
 
-export default TaskModal;
+export default withStyles(styles)(TaskModal);

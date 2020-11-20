@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
 import Tabs from '@material-ui/core/Tabs';
+import { withStyles } from '@material-ui/core';
 import Tab from '@material-ui/core/Tab';
 import ListPage from '../listPage/list';
 import SearchBar from '../searchComponent/searchComponent';
 import Header from '../header/header';
 import GroupByComponent from '../groupByComponent/groupByComponent';
+import styles from './home.style';
 
 class TabsList extends Component {
     constructor(props) {
@@ -36,12 +38,13 @@ class TabsList extends Component {
     }
 
     render() {
+        const { classes } = this.props;
         return (
-            <div style={{ margin: '4%' }}>
+            <div className={classes.homeContainer}>
                 <Header
                     handleIsnewTaskAdded={this.handleIsnewTaskAdded}
                 />
-                <div style={{ display: 'flex', alignItems: 'center' }}>
+                <div className={classes.searchContainer}>
                     <GroupByComponent
                         handleGroupByChange={this.handleGroupByChange}
                     />
@@ -71,4 +74,4 @@ class TabsList extends Component {
     }
 }
 
-export default TabsList
+export default withStyles(styles)(TabsList);
