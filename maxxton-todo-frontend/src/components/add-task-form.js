@@ -13,7 +13,7 @@ class TaskModal extends Component {
         this.state = {
             title: props.taskDataObject && props.taskDataObject.Title || '',
             description: props.taskDataObject && props.taskDataObject.Description || '',
-            dueDate: props.taskDataObject && props.taskDataObject.DueDate || '',
+            dueDate: props.taskDataObject && props.taskDataObject.DueDate || null,
             priority: props.taskDataObject && props.taskDataObject.Priority || '',
             dueTime: props.taskDataObject && props.taskDataObject.DueTime || '',
             isTitleError: true,
