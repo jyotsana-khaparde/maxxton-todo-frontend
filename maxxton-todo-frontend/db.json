@@ -1,64 +1,54 @@
 {
   "tasks": [
     {
-      "id": "720e56df-9914-4bcc-8c15-ae240f70021a",
+      "id": "94931a11-65eb-47e0-87cf-5fe26af967a6",
       "CurrentState": "Pending",
-      "Title": "easd",
-      "Description": "easd",
-      "CreatedAt": "2020-11-20T01:20:45.535Z",
+      "Title": "aqwe",
+      "Description": "qwe",
+      "CreatedAt": "2020-11-20T07:12:07.565Z",
       "DueDate": "",
       "DueTime": "",
-      "Priority": "High"
+      "Priority": "Medium"
     },
     {
-      "id": "fdc187c5-dd9b-4086-ab81-d0aafda50dc7",
-      "CurrentState": "Done",
-      "Title": "qasd",
-      "Description": "asd",
-      "CreatedAt": "2020-11-20T01:23:19.589Z",
-      "DueDate": "2020-11-07",
+      "id": "65394fda-8d3b-4833-8f73-05f26bf5c4c9",
+      "CurrentState": "Pending",
+      "Title": "gasdfsg",
+      "Description": "asdfgdh",
+      "CreatedAt": "2020-11-30T07:50:36.645Z",
+      "DueDate": "2020-11-02",
       "DueTime": "",
+      "Priority": "Medium"
+    },
+    {
+      "id": "07c36756-2487-4ff6-9895-ab499ca4fea3",
+      "CurrentState": "Pending",
+      "Title": "aqwertg",
+      "Description": "asdfgh",
+      "CreatedAt": "2020-11-20T07:50:59.004Z",
+      "DueDate": "2020-11-29",
+      "DueTime": "17:20",
       "Priority": "None"
     },
     {
-      "id": "e5e643c4-8848-47d2-8476-f19e243c418b",
-      "CurrentState": "Done",
-      "Title": "qasdf",
-      "Description": "asdf",
-      "CreatedAt": "2020-11-22T01:54:19.617Z",
-      "DueDate": "2020-11-04",
+      "id": "cd4053c3-00dc-4cee-a064-5d4ef7398ee4",
+      "CurrentState": "Pending",
+      "Title": "simran ka prjetc",
+      "Description": "store unique values ",
+      "CreatedAt": "2020-11-10T08:14:09.335Z",
+      "DueDate": "2020-11-29",
       "DueTime": "",
       "Priority": "High"
     },
     {
-      "id": "a34f04d5-7025-4448-8bb3-34ff40256047",
+      "id": "c17d6c0b-96bd-4172-be49-e7075e69c2a5",
       "CurrentState": "Pending",
-      "Title": "dasdfg",
-      "Description": "asdfg",
-      "CreatedAt": "2020-11-20T01:54:40.195Z",
-      "DueDate": "2020-11-04",
+      "Title": "qrsdasdqer",
+      "Description": "qreq",
+      "CreatedAt": "2020-11-10T08:15:22.035Z",
+      "DueDate": "2020-11-16",
       "DueTime": "",
-      "Priority": "High"
-    },
-    {
-      "id": "062d1cce-755c-4542-97ed-11d070ced53b",
-      "CurrentState": "Pending",
-      "Title": "sona",
-      "Description": "asdfg",
-      "CreatedAt": "2020-11-10T02:01:18.649Z",
-      "DueDate": "2020-11-08",
-      "DueTime": "11:31",
-      "Priority": "High"
-    },
-    {
-      "id": "3ced8d29-5616-4a54-8021-8ac367d21e9f",
-      "CurrentState": "Pending",
-      "Title": "pasdfg",
-      "Description": "ASDFG",
-      "CreatedAt": "2020-11-10T02:02:57.688Z",
-      "DueDate": "",
-      "DueTime": "",
-      "Priority": "High"
+      "Priority": "None"
     }
   ]
 }

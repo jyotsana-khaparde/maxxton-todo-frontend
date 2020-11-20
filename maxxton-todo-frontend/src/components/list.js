@@ -184,7 +184,6 @@ class ListPage extends Component {
                     {
                         this.props.groupByKey ?
                         Object.keys(groupByObject).map((key, i) => (
-                            <>
                             <tbody key={i}>
                                 <tr style={{textAlign: 'center', border: '1px solid #dddddd', padding: 8}}>
                                 {key}
@@ -194,7 +193,6 @@ class ListPage extends Component {
                                 </tr>
                                 {(groupByObject[key] || []).map(dataLists => listShow(dataLists))}
                             </tbody>
-                            </>
                         )) :
                         <tbody>
                             {(seperateTabData || []).map(dataLists => listShow(dataLists))}

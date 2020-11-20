@@ -67,33 +67,40 @@ export const sortByMapping = (sortBy, isAscending, listData) => {
 export const groupByMapping = (listData, groupByKey) => {
     console.log('listData ------>',listData);
     console.log('groupByKey ------>',groupByKey);
+    
+    let allPossibleGroupByKey = []
+    let uniqueValueArray = []
+    let newListObject = {}
+
+    // seperated all possible groupByKey
+    listData.map(listarrays => {
+          allPossibleGroupByKey.push(listarrays[groupByKey])
+    })
+    console.log('allPossibleGroupByKey------', allPossibleGroupByKey);
+
     if (groupByKey === 'CreatedAt') {
-        listData.map(listDatas => {
-            listDatas.CreatedAt = moment(listDatas.CreatedAt).format("YYYY-DD-MM")
+        let formattedCreatedAtArray = []
+        allPossibleGroupByKey.map(element => {
+            formattedCreatedAtArray.push(moment(element).format("YYYY-DD-MM"))
+        })
+        // find unique values 
+        uniqueValueArray = [...new Set(formattedCreatedAtArray)];
+        console.log('uniqueValueArray-----', uniqueValueArray)
+        uniqueValueArray.map(uniqueValue => {
+            let filteredData = listData.filter(listData => moment(listData[groupByKey]).format("YYYY-DD-MM") === uniqueValue)
+            console.log('filteredData-----', filteredData)
+            newListObject[uniqueValue] = filteredData
+        })
+    } else {
+        uniqueValueArray = [...new Set(allPossibleGroupByKey)];
+        console.log('uniqueValueArray-----', uniqueValueArray)
+        uniqueValueArray.map(uniqueValue => {
+            let filteredData = listData.filter(listData => listData[groupByKey] === uniqueValue)
+            console.log('filteredData-----', filteredData)
+            newListObject[uniqueValue] = filteredData
         })
     }
-    console.log('CreatedAt listData---', listData)
-    let data = [...listData]
-    
-    let priorityArray = []
-    data.map(listarrays => {
-          priorityArray.push(listarrays[groupByKey])
-    })
-      
-      console.log('priorityArray-----', priorityArray)
-    
-    let uniqueChars = [...new Set(priorityArray)];
-      console.log('uniqueChars-----', uniqueChars)
-      
-      
-      let newListObject = {}
-      uniqueChars.map(uniqueChar => {
-          let newdata = listData.filter(listData => listData[groupByKey] === uniqueChar)
-        console.log('newdata-----', newdata)
-        newListObject[uniqueChar] = newdata
-      })
-      
-      
+
       console.log('newListObject-----', newListObject)
       return newListObject;
 }
