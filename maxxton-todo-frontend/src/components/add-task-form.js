@@ -15,7 +15,7 @@ class TaskModal extends Component {
             priority: props.taskDataObject && props.taskDataObject.Priority || '',
             dueTime: props.taskDataObject && props.taskDataObject.DueTime || '',
             isTitleError: true,
-            isDescriptionError: true
+            isDescriptionError: false
         }
     }
 
