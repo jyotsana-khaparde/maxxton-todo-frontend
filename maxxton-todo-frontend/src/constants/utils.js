@@ -81,13 +81,13 @@ export const groupByMapping = (listData, groupByKey) => {
     if (groupByKey === 'CreatedAt') {
         let formattedCreatedAtArray = []
         allPossibleGroupByKey.map(element => {
-            formattedCreatedAtArray.push(moment(element).format("YYYY-DD-MM"))
+            formattedCreatedAtArray.push(moment(element).format("YYYY-MM-DD"))
         })
         // find unique values 
         uniqueValueArray = [...new Set(formattedCreatedAtArray)];
         console.log('uniqueValueArray-----', uniqueValueArray)
         uniqueValueArray.map(uniqueValue => {
-            let filteredData = listData.filter(listData => moment(listData[groupByKey]).format("YYYY-DD-MM") === uniqueValue)
+            let filteredData = listData.filter(listData => moment(listData[groupByKey]).format("YYYY-MM-DD") === uniqueValue)
             console.log('filteredData-----', filteredData)
             newListObject[uniqueValue] = filteredData
         })
@@ -97,7 +97,7 @@ export const groupByMapping = (listData, groupByKey) => {
         uniqueValueArray.map(uniqueValue => {
             let filteredData = listData.filter(listData => listData[groupByKey] === uniqueValue)
             console.log('filteredData-----', filteredData)
-            newListObject[uniqueValue] = filteredData
+            groupByKey === 'DueDate' && !uniqueValue ? newListObject["No Due Date"] = filteredData : newListObject[uniqueValue] = filteredData
         })
     }
 
