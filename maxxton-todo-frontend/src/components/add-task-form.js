@@ -9,11 +9,11 @@ class TaskModal extends Component {
         super(props)
         console.log('TaskModal props--->', props);
         this.state = {
-            title: props.taskDataObject && props.taskDataObject.Title || '',
-            description: props.taskDataObject && props.taskDataObject.Description || '',
-            dueDate: props.taskDataObject && props.taskDataObject.DueDate || null,
-            priority: props.taskDataObject && props.taskDataObject.Priority || '',
-            dueTime: props.taskDataObject && props.taskDataObject.DueTime || '',
+            title: (props.taskDataObject && props.taskDataObject.Title) || '',
+            description: (props.taskDataObject && props.taskDataObject.Description) || '',
+            dueDate: (props.taskDataObject && props.taskDataObject.DueDate) || null,
+            priority: (props.taskDataObject && props.taskDataObject.Priority) || '',
+            dueTime: (props.taskDataObject && props.taskDataObject.DueTime) || '',
             isTitleError: true,
             isDescriptionError: false
         }
@@ -125,10 +125,10 @@ class TaskModal extends Component {
                         <label>Priority</label><br/>
                         <select disabled={this.props.heading === 'View Task'} name='priority' style={{padding: 5, margin: '15px 0px 0px 0px', width: 294}} value={this.state.priority} onChange={this.handleChange}>
                             <option style={{ display:'none' }}/>
+                            <option value="None">None</option>
                             <option value="Low">Low</option>
                             <option value="Medium">Medium</option>
                             <option value="High">High</option>
-                            <option value="None">None</option>
                         </select>
                     </div>
                 </div>

@@ -104,7 +104,7 @@ class ListPage extends Component {
 
         const listShow = (dataLists) => (
             <tr key={dataLists.id} onClick={(e) => this.handleTrClick(e, dataLists, 'openTaskReadOnlyModal')}>
-                <td style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8, textDecoration: dataLists.CurrentState === 'Done' ? 'line-through' : 'none'}}>
+                <td style={{border: '1px solid #dddddd', textAlign: 'left', maxWidth: 500, wordBreak: 'break-all', padding: 8, textDecoration: dataLists.CurrentState === 'Done' ? 'line-through' : 'none'}}>
                     {dataLists.Title}
                 </td>
                 <td style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8, textDecoration: dataLists.CurrentState === 'Done' ? 'line-through' : 'none'}}>
@@ -116,22 +116,24 @@ class ListPage extends Component {
                 <td style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8, textDecoration: dataLists.CurrentState === 'Done' ? 'line-through' : 'none'}}>
                     {((!dataLists.DueDate && !dataLists.DueTime) || (!dataLists.DueDate && dataLists.DueTime)) ? null : moment(dataLists.DueDate).format("YYYY-MM-DD") +"  "+ dataLists.DueTime}
                 </td>
-                <td style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8, display: 'flex'}}>
-                    <EditOutlinedIcon
-                        style={{ padding: 5, borderRadius: 5, background: 'rgb(38, 131, 222)', color: 'white', margin: 3 }}
-                        onClick={(e) => this.handleTrClick(e, dataLists, 'openEditTaskModal')}
-                    />
-                    <Button
-                        variant="contained" 
-                        style={{ borderRadius: 5, background: dataLists.CurrentState === 'Done' ? '#54a4a9' : 'rgb(69 173 93)', color: 'white', padding: 5, margin: 3}}
-                        onClick={(e) => this.handleTrClick(e, dataLists, 'updateCurrentState')}
-                    >
-                        {dataLists.CurrentState === 'Pending' ? 'Done' : 'Re-Open'}
-                    </Button>
-                    <DeleteOutlineOutlinedIcon
-                        onClick={(e) => this.handleTrClick(e, dataLists, 'openDeleteModal')}
-                        style={{ padding: 5, borderRadius: 5, background: '#cc1717', color: 'white', margin: 3 }}
-                    />
+                <td style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8}}>
+                    <div style={{display: 'flex'}}>
+                        <EditOutlinedIcon
+                            style={{ padding: 5, borderRadius: 5, background: 'rgb(38, 131, 222)', color: 'white', margin: 3 }}
+                            onClick={(e) => this.handleTrClick(e, dataLists, 'openEditTaskModal')}
+                        />
+                        <Button
+                            variant="contained" 
+                            style={{ borderRadius: 5, background: dataLists.CurrentState === 'Done' ? '#54a4a9' : 'rgb(69 173 93)', color: 'white', padding: 5, margin: 3}}
+                            onClick={(e) => this.handleTrClick(e, dataLists, 'updateCurrentState')}
+                        >
+                            {dataLists.CurrentState === 'Pending' ? 'Done' : 'Re-Open'}
+                        </Button>
+                        <DeleteOutlineOutlinedIcon
+                            onClick={(e) => this.handleTrClick(e, dataLists, 'openDeleteModal')}
+                            style={{ padding: 5, borderRadius: 5, background: '#cc1717', color: 'white', margin: 3 }}
+                        />
+                    </div>
                 </td>
             </tr>
         )

@@ -14,7 +14,7 @@ function DeleteModal(props) {
             position: 'absolute',
             width: 400,
             backgroundColor: 'white',
-            margin: '200px 0px 0px 425px',
+            margin: '220px 0px 0px 500px',
             padding: 10,
             textAlign: 'center'
         }}>

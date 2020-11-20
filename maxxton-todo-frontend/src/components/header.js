@@ -32,7 +32,6 @@ class Header extends Component {
             alignItems: 'center' }}>
                 <h2>ToDo App</h2>
                 <div style={{ backgroundColor: '#2683de',
-                                border: '1px solid black',
                                 width: 50,
                                 height: 50,
                                 borderRadius: 35,

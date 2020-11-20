@@ -74,7 +74,7 @@ export const groupByMapping = (listData, groupByKey) => {
 
     // seperated all possible groupByKey
     listData.map(listarrays => {
-          allPossibleGroupByKey.push(listarrays[groupByKey])
+        allPossibleGroupByKey.push(listarrays[groupByKey])
     })
     console.log('allPossibleGroupByKey------', allPossibleGroupByKey);
 
