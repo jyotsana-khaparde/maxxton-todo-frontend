@@ -21,6 +21,7 @@ class Header extends Component {
         console.log('handleSubmit payload---', payload)
         this.props.addTask(payload)
         this.setState({ openAddTaskModal: false })
+        this.props.handleIsnewTaskAdded(true)
     }
 
     render() {

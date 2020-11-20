@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState } from 'react';
 
 const SearchBar = (props) => {
     const [searchedValue, setSearchedValue] = useState('')
@@ -23,4 +23,4 @@ const SearchBar = (props) => {
     )
 }
 
-export default SearchBar
+export default SearchBar;
