@@ -39,9 +39,9 @@ class TabsList extends Component {
                         value={this.state.groupBy} 
                         onChange={this.handleGroupByChange}
                     >
-                        <option value="None">None</option>
-                        <option value="Created On">Created On</option>
-                        <option value="Pending On">Pending On</option>
+                        <option value="">None</option>
+                        <option value="CreatedAt">Created On</option>
+                        <option value="DueDate">Pending On</option>
                         <option value="Priority">Priority</option>
                     </select>
                 </div>
@@ -62,6 +62,7 @@ class TabsList extends Component {
                 <ListPage
                     tabNumber={this.state.value}
                     searchText={this.state.searchText}
+                    groupByKey={this.state.groupBy}
                 />
             </>
         )

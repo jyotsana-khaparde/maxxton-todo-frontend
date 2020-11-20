@@ -1,4 +1,6 @@
-export const sortBy = (sortBy, isAscending, listData) => {
+import moment from 'moment';
+
+export const sortByMapping = (sortBy, isAscending, listData) => {
     console.log('1----sortBy---> ', sortBy);
     console.log('1----isAscending---> ', isAscending);
     console.log('1----listData---> ', listData);
@@ -59,4 +61,39 @@ export const sortBy = (sortBy, isAscending, listData) => {
             return data;
         }
     }
+}
+
+
+export const groupByMapping = (listData, groupByKey) => {
+    console.log('listData ------>',listData);
+    console.log('groupByKey ------>',groupByKey);
+    if (groupByKey === 'CreatedAt') {
+        listData.map(listDatas => {
+            listDatas.CreatedAt = moment(listDatas.CreatedAt).format("YYYY-DD-MM")
+        })
+    }
+    console.log('CreatedAt listData---', listData)
+    let data = [...listData]
+    
+    let priorityArray = []
+    data.map(listarrays => {
+          priorityArray.push(listarrays[groupByKey])
+    })
+      
+      console.log('priorityArray-----', priorityArray)
+    
+    let uniqueChars = [...new Set(priorityArray)];
+      console.log('uniqueChars-----', uniqueChars)
+      
+      
+      let newListObject = {}
+      uniqueChars.map(uniqueChar => {
+          let newdata = listData.filter(listData => listData[groupByKey] === uniqueChar)
+        console.log('newdata-----', newdata)
+        newListObject[uniqueChar] = newdata
+      })
+      
+      
+      console.log('newListObject-----', newListObject)
+      return newListObject;
 }

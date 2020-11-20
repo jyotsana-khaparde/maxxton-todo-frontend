@@ -9,6 +9,11 @@ const todoReducer = (state = initialState, action) => {
         case GET_TASK_LIST:
             console.log('taskList reducer---', action.data);
             let taskListData = [...action.data]
+            taskListData.sort((a, b) => {
+                let da = new Date(a.CreatedAt);
+                let db = new Date(b.CreatedAt);
+                return db - da;
+            });
         return {
             ...state,
             taskList: taskListData
@@ -22,6 +27,7 @@ const todoReducer = (state = initialState, action) => {
                 let db = new Date(b.CreatedAt);
                 return db - da;
             });
+            console.log('sort updatedDate reducer----', updatedDate);
         return {
             ...state,
             taskList: updatedDate

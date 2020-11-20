@@ -8,7 +8,7 @@ import { Button } from '@material-ui/core';
 import moment from 'moment';
 import DeleteModal from './deleteModal';
 import UnfoldMoreIcon from '@material-ui/icons/UnfoldMore';
-import { sortBy } from '../constants/sortBy';
+import { sortByMapping, groupByMapping } from '../constants/utils';
 
 class ListPage extends Component {
     constructor(props) {
@@ -21,7 +21,7 @@ class ListPage extends Component {
             taskDataObject: {},
             updateCurrentState: false,
             isAscending: true,
-            sortBy: ''
+            sortBy: '',
         }
     }
 
@@ -70,6 +70,7 @@ class ListPage extends Component {
         console.log('taskList:- ',this.props.tabNumber, this.props.taskList);
         console.log('isAscending-------', this.state.isAscending, this.state.sortBy)
         let seperateTabData = []
+        let groupByObject = {}
         if (this.props.tabNumber === 0) {
             seperateTabData = [...this.props.taskList]
         }
@@ -83,7 +84,7 @@ class ListPage extends Component {
         }
         if (this.state.sortBy) {
             console.log('---------sort har de-------');
-            seperateTabData = sortBy(this.state.sortBy, this.state.isAscending, seperateTabData)
+            seperateTabData = sortByMapping(this.state.sortBy, this.state.isAscending, seperateTabData)
         }
 
         if (this.props.searchText) {
@@ -92,6 +93,47 @@ class ListPage extends Component {
             })
             seperateTabData = filteredList
         }
+
+        if(this.props.groupByKey) {
+            console.log('this.props.groupByKey-----', this.props.groupByKey);
+            groupByObject = groupByMapping(seperateTabData, this.props.groupByKey);
+            console.log('groupByObject-----', groupByObject)
+        }
+
+
+        const listShow = (dataLists) => (
+            <tr key={dataLists.id} onClick={(e) => this.handleTrClick(e, dataLists, 'openTaskReadOnlyModal')}>
+                <td style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8, textDecoration: dataLists.CurrentState === 'Done' ? 'line-through' : 'none'}}>
+                    {dataLists.Title}
+                </td>
+                <td style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8, textDecoration: dataLists.CurrentState === 'Done' ? 'line-through' : 'none'}}>
+                    {dataLists.Priority}
+                </td>
+                <td style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8, textDecoration: dataLists.CurrentState === 'Done' ? 'line-through' : 'none'}}>
+                    {moment(dataLists.CreatedAt).format("YYYY-DD-MM")}
+                </td>
+                <td style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8, textDecoration: dataLists.CurrentState === 'Done' ? 'line-through' : 'none'}}>
+                    {!dataLists.DueDate && !dataLists.DueTime ? null : moment(dataLists.DueDate).format("YYYY-DD-MM") +"  "+ dataLists.DueTime}
+                </td>
+                <td style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8, display: 'flex'}}>
+                    <EditOutlinedIcon
+                        style={{ padding: 5, borderRadius: 5, background: 'rgb(38, 131, 222)', color: 'white', margin: 3 }}
+                        onClick={(e) => this.handleTrClick(e, dataLists, 'openEditTaskModal')}
+                    />
+                    <Button
+                        variant="contained" 
+                        style={{ borderRadius: 5, background: dataLists.CurrentState === 'Done' ? '#54a4a9' : 'rgb(69 173 93)', color: 'white', padding: 5, margin: 3}}
+                        onClick={(e) => this.handleTrClick(e, dataLists, 'updateCurrentState')}
+                    >
+                        {dataLists.CurrentState === 'Pending' ? 'Done' : 'Re-Open'}
+                    </Button>
+                    <DeleteOutlineOutlinedIcon
+                        onClick={(e) => this.handleTrClick(e, dataLists, 'openDeleteModal')}
+                        style={{ padding: 5, borderRadius: 5, background: '#cc1717', color: 'white', margin: 3 }}
+                    />
+                </td>
+            </tr>
+        )
 
         return (
             <>
@@ -139,41 +181,25 @@ class ListPage extends Component {
                             </th>
                         </tr>
                     </thead>
-                    <tbody>
-                        {(seperateTabData || []).map(dataLists => (
-                            <tr key={dataLists.id} onClick={(e) => this.handleTrClick(e, dataLists, 'openTaskReadOnlyModal')}>
-                                <td style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8, textDecoration: dataLists.CurrentState === 'Done' ? 'line-through' : 'none'}}>
-                                    {dataLists.Title}
-                                </td>
-                                <td style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8, textDecoration: dataLists.CurrentState === 'Done' ? 'line-through' : 'none'}}>
-                                    {dataLists.Priority}
-                                </td>
-                                <td style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8, textDecoration: dataLists.CurrentState === 'Done' ? 'line-through' : 'none'}}>
-                                    {moment(dataLists.CreatedAt).format("YYYY-DD-MM")}
-                                </td>
-                                <td style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8, textDecoration: dataLists.CurrentState === 'Done' ? 'line-through' : 'none'}}>
-                                    {!dataLists.DueDate && !dataLists.DueTime ? null : moment(dataLists.DueDate).format("YYYY-DD-MM") +"  "+ dataLists.DueTime}
-                                </td>
-                                <td style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8, display: 'flex'}}>
-                                    <EditOutlinedIcon
-                                        style={{ padding: 5, borderRadius: 5, background: 'rgb(38, 131, 222)', color: 'white', margin: 3 }}
-                                        onClick={(e) => this.handleTrClick(e, dataLists, 'openEditTaskModal')}
-                                    />
-                                    <Button
-                                        variant="contained" 
-                                        style={{ borderRadius: 5, background: dataLists.CurrentState === 'Done' ? '#54a4a9' : 'rgb(69 173 93)', color: 'white', padding: 5, margin: 3}}
-                                        onClick={(e) => this.handleTrClick(e, dataLists, 'updateCurrentState')}
-                                    >
-                                        {dataLists.CurrentState === 'Pending' ? 'Done' : 'Re-Open'}
-                                    </Button>
-                                    <DeleteOutlineOutlinedIcon
-                                        onClick={(e) => this.handleTrClick(e, dataLists, 'openDeleteModal')}
-                                        style={{ padding: 5, borderRadius: 5, background: '#cc1717', color: 'white', margin: 3 }}
-                                    />
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
+                    {
+                        this.props.groupByKey ?
+                        Object.keys(groupByObject).map((key, i) => (
+                            <>
+                            <tbody key={i}>
+                                <tr style={{textAlign: 'center', border: '1px solid #dddddd', padding: 8}}>
+                                {key}
+                                    {/* <td style={{ padding: 8}}> */}
+                                        {/* <span style={{}}>{key}</span> */}
+                                    {/* </td> */}
+                                </tr>
+                                {(groupByObject[key] || []).map(dataLists => listShow(dataLists))}
+                            </tbody>
+                            </>
+                        )) :
+                        <tbody>
+                            {(seperateTabData || []).map(dataLists => listShow(dataLists))}
+                        </tbody>
+                    }
                 </table>
                 {this.state.openTaskReadOnlyModal && <TaskModal
                     open={this.state.openTaskReadOnlyModal}
