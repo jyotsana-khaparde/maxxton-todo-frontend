@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import ListPage from './list';
-import SearchBar from './searchBar';
+import SearchBar from './searchComponent';
 import Header from './header';
 import GroupByComponent from './groupByComponent';
 
