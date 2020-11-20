@@ -18,13 +18,13 @@ function DeleteModal(props) {
             padding: 10,
             textAlign: 'center'
         }}>
-            <h3>{"Do you want to delete this task?"}</h3>
-            <Button style={{padding: 5, margin: 4, color: 'white', background: 'grey'}} onClick={props.handleClose}>
-                No
-            </Button>
-            <Button style={{padding: 5, margin: 4, color: 'white', background: 'rgb(69 173 93)'}} onClick={handleSubmit}>
-                Yes
-            </Button>
+        <h3>{"Do you want to delete this task?"}</h3>
+        <Button style={{padding: 5, margin: 4, color: 'white', background: 'grey'}} onClick={props.handleClose}>
+            No
+        </Button>
+        <Button style={{padding: 5, margin: 4, color: 'white', background: 'rgb(69 173 93)'}} onClick={handleSubmit}>
+            Yes
+        </Button>
         </div>
     )
     return (

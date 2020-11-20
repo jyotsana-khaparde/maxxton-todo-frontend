@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
 import { Button } from '@material-ui/core';
 import Modal from '@material-ui/core/Modal';
-import moment from 'moment';
 const uuid = require('uuid');
 
 class TaskModal extends Component {
@@ -164,9 +162,4 @@ class TaskModal extends Component {
     }
 }
 
-const mapDispatchToProps = dispatch => {
-    return {
-    }
-};
-
-export default connect(null, mapDispatchToProps)(TaskModal);
+export default TaskModal;
