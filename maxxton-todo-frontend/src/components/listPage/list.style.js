@@ -23,6 +23,35 @@ const styles = () => ({
         fontWeight: 'bold', 
         borderBottom: '1px solid grey'
     },
+    sortIconDiv: {
+        display: 'flex', 
+        alignItems: 'center', 
+        justifyContent: 'space-between'
+    },
+    sortIcon: { 
+        padding: 2, 
+        borderRadius: 5, 
+        background: 'rgb(38, 131, 222)', 
+        color: 'white', 
+        margin: 3 
+    },
+    actionButtonDiv: {
+        display: 'flex'
+    },
+    editButton: { 
+        padding: 5, 
+        borderRadius: 5, 
+        background: 'rgb(38, 131, 222)', 
+        color: 'white', 
+        margin: 3 
+    },
+    deleteButton: { 
+        padding: 5, 
+        borderRadius: 5, 
+        background: '#cc1717', 
+        color: 'white', 
+        margin: 3 
+    }
 })
 
 export default styles;

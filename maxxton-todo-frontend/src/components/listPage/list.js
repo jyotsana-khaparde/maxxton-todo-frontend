@@ -106,7 +106,10 @@ class ListPage extends Component {
 
 
         const listShow = (dataLists) => (
-            <tr key={dataLists.id} onClick={(e) => this.handleTrClick(e, dataLists, 'openTaskReadOnlyModal')}>
+            <tr
+                key={dataLists.id}
+                onClick={(e) => this.handleTrClick(e, dataLists, 'openTaskReadOnlyModal')}
+            >
                 <td style={{border: '1px solid #dddddd', textAlign: 'left', maxWidth: 500, wordBreak: 'break-all', padding: 8, textDecoration: dataLists.CurrentState === 'Done' ? 'line-through' : 'none'}}>
                     {dataLists.Title}
                 </td>
@@ -120,9 +123,9 @@ class ListPage extends Component {
                     {((!dataLists.DueDate && !dataLists.DueTime) || (!dataLists.DueDate && dataLists.DueTime)) ? null : moment(dataLists.DueDate).format("YYYY-MM-DD") +"  "+ dataLists.DueTime}
                 </td>
                 <td className={classes.tableHeading}>
-                    <div style={{display: 'flex'}}>
+                    <div className={classes.actionButtonDiv}>
                         <EditOutlinedIcon
-                            style={{ padding: 5, borderRadius: 5, background: 'rgb(38, 131, 222)', color: 'white', margin: 3 }}
+                            className={classes.editButton}
                             onClick={(e) => this.handleTrClick(e, dataLists, 'openEditTaskModal')}
                         />
                         <Button
@@ -134,7 +137,7 @@ class ListPage extends Component {
                         </Button>
                         <DeleteOutlineOutlinedIcon
                             onClick={(e) => this.handleTrClick(e, dataLists, 'openDeleteModal')}
-                            style={{ padding: 5, borderRadius: 5, background: '#cc1717', color: 'white', margin: 3 }}
+                            className={classes.deleteButton}
                         />
                     </div>
                 </td>
@@ -147,38 +150,38 @@ class ListPage extends Component {
                     <thead>
                         <tr>
                             <th className={classes.tableHeading}>
-                                <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
+                                <div className={classes.sortIconDiv}>
                                     <span>Summary</span> 
                                     <UnfoldMoreIcon
                                         onClick={() => this.handleOrder('Title')}
-                                        style={{ padding: 2, borderRadius: 5, background: 'rgb(38, 131, 222)', color: 'white', margin: 3 }}
+                                        className={classes.sortIcon}
                                     />
                                 </div>
                             </th>
                             <th className={classes.tableHeading}>
-                                <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
+                                <div className={classes.sortIconDiv}>
                                     <span>Priority</span>
                                     <UnfoldMoreIcon
                                         onClick={() => this.handleOrder('Priority')}
-                                        style={{ padding: 2, borderRadius: 5, background: 'rgb(38, 131, 222)', color: 'white', margin: 3 }}
+                                        className={classes.sortIcon}
                                     />
                                 </div>
                             </th>
                             <th className={classes.tableHeading}>
-                                <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
+                                <div className={classes.sortIconDiv}>
                                     <span>Created On</span>
                                     <UnfoldMoreIcon
                                         onClick={() => this.handleOrder('CreatedAt')}
-                                        style={{ padding: 2, borderRadius: 5, background: 'rgb(38, 131, 222)', color: 'white', margin: 3 }}
+                                        className={classes.sortIcon}
                                     />
                                 </div>
                             </th>
                             <th className={classes.tableHeading}>
-                                <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
+                                <div className={classes.sortIconDiv}>
                                     <span>Due Date</span>
                                     <UnfoldMoreIcon
                                         onClick={() => this.handleOrder('DueDate')}
-                                        style={{ padding: 2, borderRadius: 5, background: 'rgb(38, 131, 222)', color: 'white', margin: 3 }}
+                                        className={classes.sortIcon}
                                     />
                                 </div>
                             </th>
