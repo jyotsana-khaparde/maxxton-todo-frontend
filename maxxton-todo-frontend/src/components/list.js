@@ -185,11 +185,10 @@ class ListPage extends Component {
                         this.props.groupByKey ?
                         Object.keys(groupByObject).map((key, i) => (
                             <tbody key={i}>
-                                <tr style={{textAlign: 'center', border: '1px solid #dddddd', padding: 8}}>
-                                {key}
-                                    {/* <td style={{ padding: 8}}> */}
-                                        {/* <span style={{}}>{key}</span> */}
-                                    {/* </td> */}
+                                 <tr style={{ textAlign: 'center' }}>
+                                    <div style={{ position: 'relative', left: 530, padding: 5 }}>
+                                        <span style={{fontWeight: 'bold', borderBottom: '1px solid grey'}}>{key}</span>
+                                    </div>
                                 </tr>
                                 {(groupByObject[key] || []).map(dataLists => listShow(dataLists))}
                             </tbody>
