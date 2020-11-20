@@ -113,7 +113,7 @@ class ListPage extends Component {
                     {moment(dataLists.CreatedAt).format("YYYY-MM-DD")}
                 </td>
                 <td style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8, textDecoration: dataLists.CurrentState === 'Done' ? 'line-through' : 'none'}}>
-                    {!dataLists.DueDate && !dataLists.DueTime ? null : moment(dataLists.DueDate).format("YYYY-MM-DD") +"  "+ dataLists.DueTime}
+                    {((!dataLists.DueDate && !dataLists.DueTime) || (!dataLists.DueDate && dataLists.DueTime)) ? null : moment(dataLists.DueDate).format("YYYY-MM-DD") +"  "+ dataLists.DueTime}
                 </td>
                 <td style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8, display: 'flex'}}>
                     <EditOutlinedIcon
