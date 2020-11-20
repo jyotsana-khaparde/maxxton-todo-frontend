@@ -13,7 +13,6 @@ import { sortByMapping, groupByMapping } from '../constants/utils';
 class ListPage extends Component {
     constructor(props) {
         super(props)
-        console.log('props.isnewTaskAdded+++++++++++++', props.isnewTaskAdded );
         this.state = {
             openTaskReadOnlyModal: false,
             openEditTaskModal: false,
@@ -22,7 +21,6 @@ class ListPage extends Component {
             updateCurrentState: false,
             isAscending: true,
             sortBy: '',
-            isnewTaskAdded: props.isnewTaskAdded
         }
     }
 
@@ -60,8 +58,8 @@ class ListPage extends Component {
         this.setState({
             isAscending: !this.state.isAscending,
             sortBy: key,
-            isnewTaskAdded: false
         })
+        this.props.handleIsnewTaskAdded(false)
     }
 
     componentDidMount() {
@@ -71,7 +69,7 @@ class ListPage extends Component {
     render() {
         console.log('taskList:- ',this.props.tabNumber, this.props.taskList);
         console.log('isAscending-------', this.state.isAscending, this.state.sortBy)
-        console.log('this.state.isnewTaskAdded--------', this.state.isnewTaskAdded);
+        console.log('this.state.isnewTaskAdded--------', this.props.isnewTaskAdded);
         let seperateTabData = []
         let groupByObject = {}
         if (this.props.tabNumber === 0) {
@@ -85,7 +83,7 @@ class ListPage extends Component {
             let completedFilterData = [...this.props.taskList]
             seperateTabData = completedFilterData.filter(completedFilterData => completedFilterData.CurrentState === 'Pending') 
         }
-        if (this.state.sortBy && !this.state.isnewTaskAdded) {
+        if (this.state.sortBy && !this.props.isnewTaskAdded) {
             console.log('---------sort har de-------');
             seperateTabData = sortByMapping(this.state.sortBy, this.state.isAscending, seperateTabData)
         }

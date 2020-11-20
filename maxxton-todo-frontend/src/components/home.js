@@ -64,6 +64,7 @@ class TabsList extends Component {
                     searchText={this.state.searchedText}
                     groupByKey={this.state.selectedgroupByValue}
                     isnewTaskAdded={this.state.isnewTaskAdded}
+                    handleIsnewTaskAdded={this.handleIsnewTaskAdded}
                 />
             </div>
         )
