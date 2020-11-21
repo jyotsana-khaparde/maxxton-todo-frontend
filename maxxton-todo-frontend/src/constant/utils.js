@@ -82,8 +82,9 @@ export const groupByMapping = (listData, groupByKey) => {
     } else {
         uniqueValueArray = [...new Set(allPossibleGroupByKey)];
         uniqueValueArray.map(uniqueValue => {
-            let filteredData = listData.filter(listData => listData[groupByKey] === uniqueValue)
-            groupByKey === 'DueDate' && !uniqueValue ? newListObject["No Due Date"] = filteredData : newListObject[uniqueValue] = filteredData
+            let filteredData = listData.filter(listData => listData[groupByKey] === uniqueValue);
+            (groupByKey === 'DueDate' && !uniqueValue || groupByKey === 'Priority' && !uniqueValue) ? 
+            newListObject[`No ${groupByKey} `] = filteredData : newListObject[uniqueValue] = filteredData
         })
     }
 

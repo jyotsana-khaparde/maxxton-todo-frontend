@@ -15,14 +15,14 @@ class TaskModal extends Component {
             dueDate: (props.taskDataObject && props.taskDataObject.DueDate) || null,
             priority: (props.taskDataObject && props.taskDataObject.Priority) || '',
             dueTime: (props.taskDataObject && props.taskDataObject.DueTime) || '',
-            isTitleError: true,
+            isTitleError: false,
             isDescriptionError: false
         }
     }
 
     validator = (key, value) => {
         if (key === 'title' ) {
-            if ((value && value.length > 140) || (value && value.length < 10) || value.length === 0) {
+            if ((value && value.length > 140) || (value && value.length < 10)) {
                 this.setState({ isTitleError: true })
             } else {
                 this.setState({ isTitleError: false })
@@ -78,7 +78,6 @@ class TaskModal extends Component {
     }
 
     render() {
-        console.log('this.state.isTitleError || this.state.isDescriptionError---', this.state.isTitleError, this.state.isDescriptionError)
         const { classes } = this.props
         const body = (
             <div className={classes.modalContainer}>
