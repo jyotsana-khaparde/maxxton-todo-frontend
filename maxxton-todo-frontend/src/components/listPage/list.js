@@ -98,16 +98,16 @@ class ListPage extends Component {
                 key={dataLists.id}
                 onClick={(e) => this.handleTrClick(e, dataLists, 'openTaskReadOnlyModal')}
             >
-                <td style={{border: '1px solid #dddddd', textAlign: 'left', maxWidth: 500, wordBreak: 'break-all', padding: 8, textDecoration: dataLists.CurrentState === 'Done' ? 'line-through' : 'none'}}>
+                <td className={ dataLists.CurrentState === 'Done' ? classes.doneData :  classes.undoneData }>
                     {dataLists.Title}
                 </td>
-                <td style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8, textDecoration: dataLists.CurrentState === 'Done' ? 'line-through' : 'none'}}>
+                <td className={ dataLists.CurrentState === 'Done' ? classes.doneHeading : classes.undoneHeading }>
                     {dataLists.Priority}
                 </td>
-                <td style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8, textDecoration: dataLists.CurrentState === 'Done' ? 'line-through' : 'none'}}>
+                <td className={ dataLists.CurrentState === 'Done' ? classes.doneHeading : classes.undoneHeading }>
                     {moment(dataLists.CreatedAt).format("YYYY-MM-DD")}
                 </td>
-                <td style={{border: '1px solid #dddddd', textAlign: 'left', padding: 8, textDecoration: dataLists.CurrentState === 'Done' ? 'line-through' : 'none'}}>
+                <td className={ dataLists.CurrentState === 'Done' ? classes.doneHeading : classes.undoneHeading }>
                     {((!dataLists.DueDate && !dataLists.DueTime) || (!dataLists.DueDate && dataLists.DueTime)) ? null : moment(dataLists.DueDate).format("YYYY-MM-DD") +"  "+ dataLists.DueTime}
                 </td>
                 <td className={classes.tableHeading}>
@@ -117,8 +117,8 @@ class ListPage extends Component {
                             onClick={(e) => this.handleTrClick(e, dataLists, 'openEditTaskModal')}
                         />
                         <Button
-                            variant="contained" 
-                            style={{ borderRadius: 5, background: dataLists.CurrentState === 'Done' ? '#54a4a9' : 'rgb(69 173 93)', color: 'white', padding: 5, margin: 3}}
+                            variant="contained"
+                            className={ dataLists.CurrentState === 'Done' ? classes.doneButton : classes.reOpenButton }
                             onClick={(e) => this.handleTrClick(e, dataLists, 'updateCurrentState')}
                         >
                             {dataLists.CurrentState === 'Pending' ? 'Done' : 'Re-Open'}
