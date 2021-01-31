@@ -37,11 +37,11 @@ export const editTask = (payload) => {
   }
 }
 
-export const deleteTask = (id) => {
+export const deleteTask = (payload) => {
   return (dispatch) => {
-    axios.delete(`http://localhost:3000/tasks/${id}`)
+    axios.delete(`http://localhost:3000/tasks/${payload.id}`)
     .then(res => {
-        dispatch({ type: DELETE_TASK, data: id })
+        dispatch({ type: DELETE_TASK, data: payload.id })
     }).catch(error => {
         console.log(error);
     });

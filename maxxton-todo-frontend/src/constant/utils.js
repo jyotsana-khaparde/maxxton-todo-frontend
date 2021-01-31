@@ -17,7 +17,7 @@ export const sortByMapping = (sortBy, isAscending, listData) => {
                 return 0;
             });
 
-            return data;
+            return data.length > 0 ? data : [];
             
         } else {
             data.sort((a, b) => {
@@ -33,7 +33,7 @@ export const sortByMapping = (sortBy, isAscending, listData) => {
                 return 0;
             });
             
-            return data;
+            return data.length > 0 ? data : [];
         }
     }
 
@@ -44,14 +44,14 @@ export const sortByMapping = (sortBy, isAscending, listData) => {
                 let dateb = new Date(b[sortBy]);
                 return dateb - datea;
             });
-            return data;
+            return data.length > 0 ? data : [];
         } else {
             data.sort((a, b) => {
                 let datea = new Date(a[sortBy]);
                 let dateb = new Date(b[sortBy]);
                 return datea - dateb;
             });
-            return data;
+            return data.length > 0 ? data : [];
         }
     }
 }

@@ -6,7 +6,16 @@ import TaskModal from '../taskModalComponent/taskModal';
 import { addTask } from '../../redux/actionCreator';
 import styles from './header.style';
 
-const Header = (props) => {
+interface IHeaderProps {
+    classes: {
+        container: string;
+        addIcon: string;
+    };
+    handleIsnewTaskAdded: (value: boolean) => void;
+}
+
+
+const Header: React.FC<IHeaderProps> = (props: IHeaderProps) => {
     const { classes } = props;
     const [openAddTaskModal, setOpenAddTaskModal] = useState(false)
     const dispatch = useDispatch()
@@ -15,7 +24,15 @@ const Header = (props) => {
         setOpenAddTaskModal(true)
     }
 
-    const handleSubmit = (payload) => {
+    const handleSubmit = (payload: {
+        CurrentState: string,
+        Description: string,
+        DueDate: string,
+        DueTime: string,
+        Priority: string,
+        Title: string,
+        id: string
+    }) => {
         dispatch(addTask(payload))
         setOpenAddTaskModal(false)
         props.handleIsnewTaskAdded(true)

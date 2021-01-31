@@ -2,11 +2,23 @@ import React, { useState } from 'react';
 import { withStyles } from '@material-ui/core';
 import styles from './search.style';
 
-const SearchBar = (props) => {
-    const { classes } = props;
-    const [searchedValue, setSearchedValue] = useState('')
+interface ISearchProps {
+    classes: {
+        label: string,
+        searchInput: string,
+    };
+    handleSearchBarValue: (value: string) => void;
+}
 
-    const handleSearchValue = (e) => {
+interface ISearchEvent {
+    [propsName: string]: any
+}
+
+const SearchBar: React.FC<ISearchProps> = (props: ISearchProps) => {
+    const { classes } = props;
+    const [searchedValue, setSearchedValue] = useState<string>('')
+
+    const handleSearchValue = (e: ISearchEvent) => {
         setSearchedValue(e.target.value)
         props.handleSearchBarValue(e.target.value)
     }

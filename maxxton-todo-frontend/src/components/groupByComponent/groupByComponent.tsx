@@ -2,11 +2,25 @@ import React, { useState } from 'react';
 import { withStyles } from '@material-ui/core';
 import styles from './groupBy.styles';
 
-const GroupByComponent = (props) => {
-    const { classes } = props;
-    const [groupByKey, setGroupByKey] = useState('')
+interface IGroupByProps {
+    classes: {
+        container: string,
+        selectOption: string,
+    };
+    handleGroupByChange: (value: string) => void;
+    heading?: string;
+};
 
-    const handleGroupByChange = (event) => {
+interface IGroupEvent {
+    [propsName: string]: any
+}
+
+const GroupByComponent: React.FC<IGroupByProps> = (props: IGroupByProps) => {
+    console.log('GroupByComponent props---', props);
+    const { classes } = props;
+    const [groupByKey, setGroupByKey] = useState<string>('')
+
+    const handleGroupByChange = (event: IGroupEvent) => {
         setGroupByKey(event.target.value)
         props.handleGroupByChange(event.target.value)
     }

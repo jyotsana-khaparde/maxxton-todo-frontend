@@ -2,14 +2,28 @@ import React, {Component} from 'react';
 import Tabs from '@material-ui/core/Tabs';
 import { withStyles } from '@material-ui/core';
 import Tab from '@material-ui/core/Tab';
-import ListPage from '../listPage/list';
-import SearchBar from '../searchComponent/searchComponent';
 import Header from '../header/header';
 import GroupByComponent from '../groupByComponent/groupByComponent';
+import ListPage from '../listPage/list';
+import SearchBar from '../searchComponent/searchComponent';
 import styles from './home.style';
 
-class TabsList extends Component {
-    constructor(props) {
+interface ITabsListProps {
+    classes: {
+        homeContainer: string,
+        searchContainer: string
+    };
+};
+  
+interface ITabsListState {
+    selectedTab: number;
+    searchedText: string;
+    selectedgroupByValue: string;
+    isnewTaskAdded: boolean;
+};
+
+class TabsList extends Component<ITabsListProps, ITabsListState> {
+    constructor(props:ITabsListProps) {
         super(props)
         this.state = {
             selectedTab: 0,
@@ -19,17 +33,17 @@ class TabsList extends Component {
         }
     }
 
-    handleIsnewTaskAdded = (value) => {
-        this.setState({ isnewTaskAdded: value})
+    handleIsnewTaskAdded = (value: boolean) => {
+        this.setState({ isnewTaskAdded: value })
     }
 
-    handleGroupByChange = (value) => {
+    handleGroupByChange = (value: string) => {
         this.setState({ selectedgroupByValue:  value})
     }
-    handleTabChange = (event, value) => {
+    handleTabChange = (event: object, value: number) => {
         this.setState({ selectedTab: value })
     }
-    handleSearchBarValue = (value) => {
+    handleSearchBarValue = (value: string) => {
         this.setState({ searchedText: value })
     }
 
