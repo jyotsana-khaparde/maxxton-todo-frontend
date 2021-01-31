@@ -1,0 +1,20 @@
+.modalContainer {
+    position: absolute;
+    width: 400px;
+    background-color: white;
+    margin: 220px 0px 0px 500px;
+    padding: 10px;
+    text-align: center;
+};
+
+.noButton {
+    padding: 5px;
+    margin: 4px;
+    background-color: gray;
+};
+
+.yesButton {
+    padding: 5px;
+    margin: 4px;
+    background: green;
+};

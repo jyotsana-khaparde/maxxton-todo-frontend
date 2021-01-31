@@ -1,0 +1,50 @@
+.taskModalContainer {
+    position: absolute;
+    width: 600px;
+    background-color: white;
+    margin: 160px 0px 0px 400px;
+    padding: 10px;
+};
+.searchContainer {
+    display: flex;
+    align-items: center;
+};
+.textFieldDiv {
+    display: flex;
+    justify-content: space-between;
+};
+.innerInput {
+    display: flex;
+};
+.dueDate {
+    padding: 5px; 
+    margin: 6px 0px 6px 0px;
+};
+.dueTime {
+    margin-top: 11px;
+};
+.select {
+    padding: 5px;
+    margin: 15px 0px 0px 0px;
+    width: 294px;
+};
+.buttonContainer {
+    text-align: end;
+};
+.cancelButton {
+    padding: 5px;
+    margin: 4px;
+    color:white;
+    background:gray;
+};
+.title {
+    padding: 5px;
+    margin: 6px 0px 6px 0px;
+    width: 588px;
+};
+.description {
+    padding: 5px;
+    margin: 6px 0px 6px 0px;
+    width: 588px;
+    height: 100px;
+};

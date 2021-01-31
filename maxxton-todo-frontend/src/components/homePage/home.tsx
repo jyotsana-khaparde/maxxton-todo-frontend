@@ -1,19 +1,11 @@
 import React, {Component} from 'react';
 import Tabs from '@material-ui/core/Tabs';
-import { withStyles } from '@material-ui/core';
 import Tab from '@material-ui/core/Tab';
 import Header from '../header/header';
 import GroupByComponent from '../groupByComponent/groupByComponent';
 import ListPage from '../listPage/list';
 import SearchBar from '../searchComponent/searchComponent';
-import styles from './home.style';
-
-interface ITabsListProps {
-    classes: {
-        homeContainer: string,
-        searchContainer: string
-    };
-};
+import '../styles/home.scss';
   
 interface ITabsListState {
     selectedTab: number;
@@ -22,8 +14,12 @@ interface ITabsListState {
     isnewTaskAdded: boolean;
 };
 
-class TabsList extends Component<ITabsListProps, ITabsListState> {
-    constructor(props:ITabsListProps) {
+interface IPropsName {
+    [propsName: string]: any
+}
+
+class TabsList extends Component<IPropsName, ITabsListState> {
+    constructor(props: IPropsName) {
         super(props)
         this.state = {
             selectedTab: 0,
@@ -48,13 +44,12 @@ class TabsList extends Component<ITabsListProps, ITabsListState> {
     }
 
     render() {
-        const { classes } = this.props;
         return (
-            <div className={classes.homeContainer}>
+            <div className='homeContainer'>
                 <Header
                     handleIsnewTaskAdded={this.handleIsnewTaskAdded}
                 />
-                <div className={classes.searchContainer}>
+                <div className='searchContainer'>
                     <GroupByComponent
                         handleGroupByChange={this.handleGroupByChange}
                     />
@@ -84,4 +79,4 @@ class TabsList extends Component<ITabsListProps, ITabsListState> {
     }
 }
 
-export default withStyles(styles)(TabsList);
+export default TabsList;

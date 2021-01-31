@@ -1,0 +1,26 @@
+.container { 
+    display: flex;
+    justify-content:space-between;
+    align-items:center;
+};
+
+.addIcon { 
+    background-color: #2683de;
+    width: 50px;
+    height: 50px;
+    border-radius: 35px;
+    border: none;
+    box-shadow: 1px 1px 4px 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+};
+
+.homeContainer { 
+    margin: 4%;
+};
+
+.searchContainer { 
+    display: flex;
+    align-items: center;
+}

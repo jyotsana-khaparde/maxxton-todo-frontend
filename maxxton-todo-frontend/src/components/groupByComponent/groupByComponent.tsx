@@ -1,12 +1,7 @@
 import React, { useState } from 'react';
-import { withStyles } from '@material-ui/core';
-import styles from './groupBy.styles';
+import '../styles/groupBy.scss';
 
 interface IGroupByProps {
-    classes: {
-        container: string,
-        selectOption: string,
-    };
     handleGroupByChange: (value: string) => void;
     heading?: string;
 };
@@ -16,8 +11,6 @@ interface IGroupEvent {
 }
 
 const GroupByComponent: React.FC<IGroupByProps> = (props: IGroupByProps) => {
-    console.log('GroupByComponent props---', props);
-    const { classes } = props;
     const [groupByKey, setGroupByKey] = useState<string>('')
 
     const handleGroupByChange = (event: IGroupEvent) => {
@@ -26,12 +19,12 @@ const GroupByComponent: React.FC<IGroupByProps> = (props: IGroupByProps) => {
     }
 
     return (
-        <div className={classes.container}>
+        <div className='groupContainer'>
             <label>Group By</label><br/>
             <select
                 disabled={props.heading === 'View Task'}
                 name='groupByKey' 
-                className={classes.selectOption} 
+                className='selectOption'
                 value={groupByKey} 
                 onChange={handleGroupByChange}
             >
@@ -44,4 +37,4 @@ const GroupByComponent: React.FC<IGroupByProps> = (props: IGroupByProps) => {
     )
 }
 
-export default withStyles(styles)(GroupByComponent);
+export default GroupByComponent;

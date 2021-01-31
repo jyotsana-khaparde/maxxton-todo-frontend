@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import { Button } from '@material-ui/core';
 import Modal from '@material-ui/core/Modal';
-import styles from './taskModal.style';
+import '../styles/taskModal.scss';
 const uuid = require('uuid');
 
 class TaskModal extends Component {
     constructor(props) {
+        console.log('props----', props);
         super(props)
         this.state = {
             title: (props.taskDataObject && props.taskDataObject.Title) || '',
@@ -78,9 +78,8 @@ class TaskModal extends Component {
     }
 
     render() {
-        const { classes } = this.props
         const body = (
-            <div className={classes.modalContainer}>
+            <div className='taskModalContainer'>
               <h3>{this.props.heading}</h3>  
             <form onSubmit={this.handleSubmit}>
                 <label>Title</label><br/>
@@ -90,7 +89,7 @@ class TaskModal extends Component {
                     value={this.state.title} 
                     onChange={this.handleChange} 
                     placeholder='Title' 
-                    className={classes.title} 
+                    className='title' 
                 /><br/>
                 <label>Description</label><br/>
                 <textarea
@@ -99,14 +98,14 @@ class TaskModal extends Component {
                     value={this.state.description} 
                     onChange={this.handleChange} 
                     placeholder='Description' 
-                    className={classes.description} 
+                    className='description'
                 /><br/>
-                <div className={classes.textFieldDiv}>
-                    <div className={classes.innerInput}>
+                <div className='textFieldDiv'>
+                    <div className='innerInput'>
                         <div>
                             <label>Due Date</label><br/>
                             <TextField
-                                className={classes.dueDate}
+                                className='dueDate'
                                 name='dueDate'
                                 type="date"
                                 value={this.state.dueDate}
@@ -119,7 +118,7 @@ class TaskModal extends Component {
                         <div>
                             <label>Time</label><br/>
                             <TextField
-                                className={classes.dueTime}
+                                className='dueTime'
                                 name='dueTime'
                                 type="time"
                                 value={this.state.dueTime}
@@ -135,7 +134,7 @@ class TaskModal extends Component {
                         <select
                             disabled={this.props.heading === 'View Task'} 
                             name='priority' 
-                            className={classes.select}
+                            className='select'
                             value={this.state.priority} 
                             onChange={this.handleChange}
                         >
@@ -147,11 +146,11 @@ class TaskModal extends Component {
                         </select>
                     </div>
                 </div>
-                <div className={classes.buttonContainer}>
+                <div className='buttonContainer'>
                     <Button 
                         type="submit" 
                         variant="contained" 
-                        className={classes.cancelButton} 
+                        className='cancelButton'
                         onClick={this.props.handleClose}
                     >
                         Cancel
@@ -182,4 +181,4 @@ class TaskModal extends Component {
     }
 }
 
-export default withStyles(styles)(TaskModal);
+export default TaskModal;
