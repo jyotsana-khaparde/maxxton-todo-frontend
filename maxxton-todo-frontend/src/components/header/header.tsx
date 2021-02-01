@@ -7,6 +7,16 @@ import '../styles/header.scss';
 
 interface IHeaderProps {
     handleIsnewTaskAdded: (value: boolean) => void;
+};
+
+type Tpayload = {
+    CurrentState: string,
+    Description: string,
+    DueDate: string,
+    DueTime: string,
+    Priority: string,
+    Title: string,
+    id: string
 }
 
 const Header: React.FC<IHeaderProps> = (props: IHeaderProps) => {
@@ -17,15 +27,7 @@ const Header: React.FC<IHeaderProps> = (props: IHeaderProps) => {
         setOpenAddTaskModal(true)
     }
 
-    const handleSubmit = (payload: {
-        CurrentState: string,
-        Description: string,
-        DueDate: string,
-        DueTime: string,
-        Priority: string,
-        Title: string,
-        id: string
-    }) => {
+    const handleSubmit = (payload: Tpayload) => {
         dispatch(addTask(payload))
         setOpenAddTaskModal(false)
         props.handleIsnewTaskAdded(true)

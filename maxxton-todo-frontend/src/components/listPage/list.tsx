@@ -11,18 +11,6 @@ import UnfoldMoreIcon from '@material-ui/icons/UnfoldMore';
 import { sortByMapping, groupByMapping } from '../../constant/utils';
 import '../styles/list.scss';
 
-interface IListPageProps {
-    deleteTask: (value: object) => void;
-    editTask: (value: object) => void;
-    getTaskList: () => void;
-    groupByKey: string;
-    handleIsnewTaskAdded: (value: boolean) => void;
-    isnewTaskAdded: boolean;
-    searchText: string;
-    tabNumber: number;
-    taskList: any[];
-};
-
 interface IdataList {
     id: string,
     CurrentState: 'Pending' | 'Done',
@@ -33,6 +21,18 @@ interface IdataList {
     DueTime: string,
     Priority: string,
 }
+
+interface IListPageProps {
+    deleteTask: (value: string) => void;
+    editTask: (value: IdataList) => void;
+    getTaskList: () => void;
+    groupByKey: string;
+    handleIsnewTaskAdded: (value: boolean) => void;
+    isnewTaskAdded: boolean;
+    searchText: string;
+    tabNumber: number;
+    taskList: any[];
+};
   
 interface IListPageState {
     openTaskReadOnlyModal: boolean,
@@ -279,8 +279,8 @@ const mapStateToProps = (state: IListPageProps) => {
 const mapDispatchToProps = (dispatch: any) => {
     return {
         getTaskList: () => dispatch(getTaskList()),
-        editTask: (payload: object) => dispatch(editTask(payload)),
-        deleteTask: (payload: object) => dispatch(deleteTask(payload))
+        editTask: (payload: IdataList) => dispatch(editTask(payload)),
+        deleteTask: (payload: string) => dispatch(deleteTask(payload))
     }
 };
 
