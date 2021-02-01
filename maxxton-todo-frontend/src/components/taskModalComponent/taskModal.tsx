@@ -5,14 +5,47 @@ import Modal from '@material-ui/core/Modal';
 import '../styles/taskModal.scss';
 const uuid = require('uuid');
 
-class TaskModal extends Component {
-    constructor(props) {
-        console.log('props----', props);
+interface ITaskModaltState {
+    title: string;
+    description: string;
+    dueDate: string;
+    priority: string;
+    dueTime: string;
+    isTitleError: boolean;
+    isDescriptionError: boolean;
+};
+
+type taskData = {
+    Title: string,
+    Description: string,
+    DueDate: string,
+    Priority: string,
+    DueTime: string,
+    CurrentState: any,
+    CreatedAt: any,
+    id: any,
+}
+
+interface ITaskModalProps {
+    taskDataObject?: taskData;
+    heading: string;
+    handleModalSubmit: (value: taskData) => void;
+    open: boolean;
+    handleClose: () => void;
+}
+
+interface IEvent {
+    [propsName: string]: any
+}
+
+
+class TaskModal extends Component<ITaskModalProps, ITaskModaltState> {
+    constructor(props:ITaskModalProps) {
         super(props)
         this.state = {
             title: (props.taskDataObject && props.taskDataObject.Title) || '',
             description: (props.taskDataObject && props.taskDataObject.Description) || '',
-            dueDate: (props.taskDataObject && props.taskDataObject.DueDate) || null,
+            dueDate: (props.taskDataObject && props.taskDataObject.DueDate) || '',
             priority: (props.taskDataObject && props.taskDataObject.Priority) || '',
             dueTime: (props.taskDataObject && props.taskDataObject.DueTime) || '',
             isTitleError: false,
@@ -20,7 +53,7 @@ class TaskModal extends Component {
         }
     }
 
-    validator = (key, value) => {
+    validator = (key: string, value: string) => {
         if (key === 'title' ) {
             if ((value && value.length > 140) || (value && value.length < 10)) {
                 this.setState({ isTitleError: true })
@@ -38,7 +71,8 @@ class TaskModal extends Component {
         }
     }
 
-    handleChange = (event) => {
+    handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>): void => {
+        // @ts-ignore
         this.setState({
             [event.target.name]: event.target.value
         },
@@ -47,15 +81,25 @@ class TaskModal extends Component {
         })
     }
 
-    handleSubmit = (e) => {
-        let payload;
+    handleSubmit = (e: IEvent) => {
+        let payload:taskData = {
+            Title: '',
+            Description: '',
+            DueDate: '',
+            Priority: '',
+            DueTime: '',
+            CurrentState: '',
+            CreatedAt: '',
+            id: ''
+        };
+
         if (this.props.heading === 'Edit Task') {
             payload = {
-                id: this.props.taskDataObject.id,
-                CurrentState: this.props.taskDataObject.CurrentState,
+                id: this.props.taskDataObject && this.props.taskDataObject.id,
+                CurrentState: this.props.taskDataObject && this.props.taskDataObject.CurrentState,
                 Title: this.state.title,
                 Description: this.state.description,
-                CreatedAt: this.props.taskDataObject.CreatedAt,
+                CreatedAt: this.props.taskDataObject && this.props.taskDataObject.CreatedAt,
                 DueDate: this.state.dueDate,
                 DueTime: this.state.dueTime,
                 Priority: this.state.priority
