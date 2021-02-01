@@ -2,7 +2,7 @@
   "tasks": [
     {
       "id": "df8cc3b2-0dbd-40c5-9561-6d87930a7b27",
-      "CurrentState": "Pending",
+      "CurrentState": "Done",
       "Title": "complete react js tutorial",
       "Description": "watch it from youtube",
       "CreatedAt": "2020-11-21T18:26:06.096Z",
@@ -12,7 +12,7 @@
     },
     {
       "id": "ebc2b65b-c2ce-4211-b485-9128cbbf6293",
-      "CurrentState": "Pending",
+      "CurrentState": "Done",
       "Title": "buy chair for home",
       "Description": "buy chair of black color",
       "CreatedAt": "2020-11-21T18:27:29.293Z",

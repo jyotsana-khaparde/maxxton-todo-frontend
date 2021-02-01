@@ -1,0 +1,95 @@
+
+.table {
+    font-family: arial, sans-serif; 
+    border-collapse:collapse;
+    width: 100%; 
+    margin-top: 10px;
+};
+.tableHeading {
+    border: 1px solid #dddddd;
+    text-align:left;
+    padding: 8px;
+};
+.singleTR { 
+    text-align:center;
+};
+.rowHeadingDiv { 
+    position: relative;
+    left: 530px;
+    padding: 5px;
+};
+.rowHeading {
+    font-weight:bold;
+    border-bottom:1px solid gray;
+};
+.sortIconDiv {
+    display: flex;
+    align-items:center;
+    justify-content:space-between;
+};
+.sortIcon { 
+    padding: 2px;
+    border-radius:5px; 
+    background:rgb(38, 131, 222);
+    color: white; 
+    margin: 3px;
+};
+.actionButtonDiv {
+    display: flex;
+};
+.editButton { 
+    padding: 5px;
+    border-radius:5px; 
+    background:rgb(38, 131, 222);
+    color: white; 
+    margin: 3px;
+};
+.deleteButton {
+    padding: 5px; 
+    border-radius:5px;
+    background: #cc1717;
+    color: white; 
+    margin: 3px;
+};
+.doneData {
+    border: 1px solid #dddddd;
+    text-align:left;
+    max-width:500px; 
+    word-break:break-all;
+    padding: 8px;
+    text-decoration:line-through;
+};
+.undoneData {
+    border: 1px solid #dddddd;
+    text-align: left; 
+    max-width: 500px; 
+    word-break: break-all; 
+    padding: 8px;
+    text-decoration: none;
+};
+.doneHeading {
+    border: 1px solid #dddddd; 
+    text-align: left;
+    padding: 8px; 
+    text-decoration:line-through; 
+};
+.undoneHeading {
+    border: 1px solid #dddddd;
+    text-align: left; 
+    padding: 8px; 
+    text-decoration: none;
+};
+.doneButton {
+    border-radius: 5px;
+    background: #54a4a9; 
+    color: white; 
+    padding: 5px; 
+    margin: 3px;
+};
+.reOpenButton {
+    border-radius: 5px;
+    background: rgb(69, 173, 93);
+    color: white;
+    padding: 5px;
+    margin: 3px;
+}

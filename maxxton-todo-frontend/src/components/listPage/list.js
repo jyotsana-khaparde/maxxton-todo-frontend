@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import { withStyles } from '@material-ui/core';
 import { getTaskList, editTask, deleteTask } from '../../redux/actionCreator';
 import TaskModal from '../taskModalComponent/taskModal';
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
@@ -10,7 +9,7 @@ import moment from 'moment';
 import DeleteModal from '../deleteModalComponent/deleteModal';
 import UnfoldMoreIcon from '@material-ui/icons/UnfoldMore';
 import { sortByMapping, groupByMapping } from '../../constant/utils';
-import styles from './list.style';
+import '../styles/list.scss';
 
 class ListPage extends Component {
     constructor(props) {
@@ -63,7 +62,6 @@ class ListPage extends Component {
     }
 
     render() {
-        const { classes } = this.props;
         let seperateTabData = []
         let groupByObject = {}
         if (this.props.tabNumber === 0) {
@@ -98,34 +96,34 @@ class ListPage extends Component {
                 key={dataLists.id}
                 onClick={(e) => this.handleTrClick(e, dataLists, 'openTaskReadOnlyModal')}
             >
-                <td className={ dataLists.CurrentState === 'Done' ? classes.doneData :  classes.undoneData }>
+                <td className={ dataLists.CurrentState === 'Done' ? 'doneData' :  'undoneData' }>
                     {dataLists.Title}
                 </td>
-                <td className={ dataLists.CurrentState === 'Done' ? classes.doneHeading : classes.undoneHeading }>
+                <td className={ dataLists.CurrentState === 'Done' ? 'doneHeading' : 'undoneHeading' }>
                     {dataLists.Priority}
                 </td>
-                <td className={ dataLists.CurrentState === 'Done' ? classes.doneHeading : classes.undoneHeading }>
+                <td className={ dataLists.CurrentState === 'Done' ? 'doneHeading' : 'undoneHeading' }>
                     {moment(dataLists.CreatedAt).format("YYYY-MM-DD")}
                 </td>
-                <td className={ dataLists.CurrentState === 'Done' ? classes.doneHeading : classes.undoneHeading }>
+                <td className={ dataLists.CurrentState === 'Done' ? 'doneHeading' : 'undoneHeading' }>
                     {((!dataLists.DueDate && !dataLists.DueTime) || (!dataLists.DueDate && dataLists.DueTime)) ? null : moment(dataLists.DueDate).format("YYYY-MM-DD") +"  "+ dataLists.DueTime}
                 </td>
-                <td className={classes.tableHeading}>
-                    <div className={classes.actionButtonDiv}>
+                <td className='tableHeading'>
+                    <div className='actionButtonDiv'>
                         <EditOutlinedIcon
-                            className={classes.editButton}
+                            className='editButton'
                             onClick={(e) => this.handleTrClick(e, dataLists, 'openEditTaskModal')}
                         />
                         <Button
                             variant="contained"
-                            className={ dataLists.CurrentState === 'Done' ? classes.doneButton : classes.reOpenButton }
+                            className={ dataLists.CurrentState === 'Done' ? 'doneButton' : 'reOpenButton' }
                             onClick={(e) => this.handleTrClick(e, dataLists, 'updateCurrentState')}
                         >
                             {dataLists.CurrentState === 'Pending' ? 'Done' : 'Re-Open'}
                         </Button>
                         <DeleteOutlineOutlinedIcon
                             onClick={(e) => this.handleTrClick(e, dataLists, 'openDeleteModal')}
-                            className={classes.deleteButton}
+                            className='deleteButton'
                         />
                     </div>
                 </td>
@@ -134,46 +132,46 @@ class ListPage extends Component {
 
         return (
             <>
-                <table className={classes.table}>
+                <table className='table'>
                     <thead>
                         <tr>
-                            <th className={classes.tableHeading}>
-                                <div className={classes.sortIconDiv}>
+                            <th className='tableHeading'>
+                                <div className='sortIconDiv'>
                                     <span>Summary</span> 
                                     <UnfoldMoreIcon
                                         onClick={() => this.handleOrder('Title')}
-                                        className={classes.sortIcon}
+                                        className='sortIcon'
                                     />
                                 </div>
                             </th>
-                            <th className={classes.tableHeading}>
-                                <div className={classes.sortIconDiv}>
+                            <th className='tableHeading'>
+                                <div className='sortIconDiv'>
                                     <span>Priority</span>
                                     <UnfoldMoreIcon
                                         onClick={() => this.handleOrder('Priority')}
-                                        className={classes.sortIcon}
+                                        className='sortIcon'
                                     />
                                 </div>
                             </th>
-                            <th className={classes.tableHeading}>
-                                <div className={classes.sortIconDiv}>
+                            <th className='tableHeading'>
+                                <div className='sortIconDiv'>
                                     <span>Created On</span>
                                     <UnfoldMoreIcon
                                         onClick={() => this.handleOrder('CreatedAt')}
-                                        className={classes.sortIcon}
+                                        className='sortIcon'
                                     />
                                 </div>
                             </th>
-                            <th className={classes.tableHeading}>
-                                <div className={classes.sortIconDiv}>
+                            <th className='tableHeading'>
+                                <div className='sortIconDiv'>
                                     <span>Due Date</span>
                                     <UnfoldMoreIcon
                                         onClick={() => this.handleOrder('DueDate')}
-                                        className={classes.sortIcon}
+                                        className='sortIcon'
                                     />
                                 </div>
                             </th>
-                            <th className={classes.tableHeading}>
+                            <th className='tableHeading'>
                                 <span>Actions</span>
                             </th>
                         </tr>
@@ -182,9 +180,9 @@ class ListPage extends Component {
                         this.props.groupByKey ?
                         Object.keys(groupByObject).map((key, i) => (
                             <tbody key={i}>
-                                 <tr className={classes.singleTR}>
-                                    <div className={classes.rowHeadingDiv}>
-                                        <span className={classes.rowHeading}>{key}</span>
+                                 <tr className='singleTR'>
+                                    <div className='rowHeadingDiv'>
+                                        <span className='rowHeading'>{key}</span>
                                     </div>
                                 </tr>
                                 {(groupByObject[key] || []).map(dataLists => listShow(dataLists))}
@@ -232,4 +230,4 @@ const mapDispatchToProps = dispatch => {
     }
 };
 
-export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(ListPage));
+export default connect(mapStateToProps, mapDispatchToProps)(ListPage);
