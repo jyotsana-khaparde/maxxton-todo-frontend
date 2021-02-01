@@ -34,11 +34,6 @@ interface ITaskModalProps {
     handleClose: () => void;
 }
 
-interface IEvent {
-    [propsName: string]: any
-}
-
-
 class TaskModal extends Component<ITaskModalProps, ITaskModaltState> {
     constructor(props:ITaskModalProps) {
         super(props)
@@ -81,7 +76,7 @@ class TaskModal extends Component<ITaskModalProps, ITaskModaltState> {
         })
     }
 
-    handleSubmit = (e: IEvent) => {
+    handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
         let payload:taskData = {
             Title: '',
             Description: '',

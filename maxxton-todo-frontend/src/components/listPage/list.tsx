@@ -11,8 +11,49 @@ import UnfoldMoreIcon from '@material-ui/icons/UnfoldMore';
 import { sortByMapping, groupByMapping } from '../../constant/utils';
 import '../styles/list.scss';
 
-class ListPage extends Component {
-    constructor(props) {
+interface IListPageProps {
+    deleteTask: (value: object) => void;
+    editTask: (value: object) => void;
+    getTaskList: () => void;
+    groupByKey: string;
+    handleIsnewTaskAdded: (value: boolean) => void;
+    isnewTaskAdded: boolean;
+    searchText: string;
+    tabNumber: number;
+    taskList: any[];
+};
+
+interface IdataList {
+    id: string,
+    CurrentState: 'Pending' | 'Done',
+    Title: string,
+    Description: string,
+    CreatedAt: string,
+    DueDate: string,
+    DueTime: string,
+    Priority: string,
+}
+  
+interface IListPageState {
+    openTaskReadOnlyModal: boolean,
+    openEditTaskModal: boolean,
+    openDeleteModal: boolean,
+    taskDataObject: any,
+    updateCurrentState: boolean,
+    isAscending: boolean,
+    sortBy: string,
+};
+
+interface IEvent {
+    [key: string]: any
+}
+
+interface MyGroupType {
+    [key: string]: IdataList;
+}
+
+class ListPage extends Component<IListPageProps, IListPageState> {
+    constructor(props: IListPageProps) {
         super(props)
         this.state = {
             openTaskReadOnlyModal: false,
@@ -25,12 +66,13 @@ class ListPage extends Component {
         }
     }
 
-    handleTrClick = (e, dataLists, key) => {
+    handleTrClick = (e: IEvent, dataLists: IdataList, key: any) => {
         e.stopPropagation()
         if (key === 'updateCurrentState') {
             dataLists['CurrentState'] === 'Pending' ? dataLists['CurrentState'] = 'Done' : dataLists['CurrentState'] = 'Pending'; 
             this.props.editTask(dataLists)
         } else {
+            // @ts-ignore
             this.setState({
                 [key]: true,
                 taskDataObject: dataLists
@@ -38,18 +80,21 @@ class ListPage extends Component {
         }
     }
 
-    handleSubmit = (payload) => {
+    handleSubmit = (payload: IdataList) => {
         if (this.state.openEditTaskModal) {
             this.props.editTask(payload)
             this.setState({ openEditTaskModal: false })
         }
+    }
+
+    handleDeleteSubmit = () => {
         if (this.state.openDeleteModal) {
             this.props.deleteTask(this.state.taskDataObject.id)
             this.setState({ openDeleteModal: false })
         }
     }
 
-    handleOrder = (key) => {
+    handleOrder = (key: string) => {
         this.setState({
             isAscending: !this.state.isAscending,
             sortBy: key,
@@ -62,8 +107,8 @@ class ListPage extends Component {
     }
 
     render() {
-        let seperateTabData = []
-        let groupByObject = {}
+        let seperateTabData: IdataList[] = [];
+        let groupByObject: MyGroupType = {};
         if (this.props.tabNumber === 0) {
             seperateTabData = [...this.props.taskList]
         }
@@ -76,6 +121,7 @@ class ListPage extends Component {
             seperateTabData = completedFilterData.filter(completedFilterData => completedFilterData.CurrentState === 'Pending') 
         }
         if (this.state.sortBy && !this.props.isnewTaskAdded) {
+            //@ts-ignore
             seperateTabData = sortByMapping(this.state.sortBy, this.state.isAscending, seperateTabData)
         }
 
@@ -87,11 +133,12 @@ class ListPage extends Component {
         }
 
         if(this.props.groupByKey) {
+            //@ts-ignore
             groupByObject = groupByMapping(seperateTabData, this.props.groupByKey);
         }
 
 
-        const listShow = (dataLists) => (
+        const listShow = (dataLists: IdataList)  => (
             <tr
                 key={dataLists.id}
                 onClick={(e) => this.handleTrClick(e, dataLists, 'openTaskReadOnlyModal')}
@@ -185,7 +232,10 @@ class ListPage extends Component {
                                         <span className='rowHeading'>{key}</span>
                                     </div>
                                 </tr>
-                                {(groupByObject[key] || []).map(dataLists => listShow(dataLists))}
+                                {
+                                    //@ts-ignore
+                                    (groupByObject[key] || []).map(dataLists => listShow(dataLists))
+                                }
                             </tbody>
                         )) :
                         <tbody>
@@ -193,40 +243,44 @@ class ListPage extends Component {
                         </tbody>
                     }
                 </table>
-                {this.state.openTaskReadOnlyModal && <TaskModal
+                {this.state.openTaskReadOnlyModal && 
+                //@ts-ignore
+                <TaskModal
                     open={this.state.openTaskReadOnlyModal}
                     handleClose={() => this.setState({ openTaskReadOnlyModal: false })}
                     heading={'View Task'}
                     taskDataObject={this.state.taskDataObject}
                 />}
-                {this.state.openEditTaskModal && <TaskModal
+                {this.state.openEditTaskModal && 
+                <TaskModal
                     open={this.state.openEditTaskModal}
                     handleClose={() => this.setState({ openEditTaskModal: false })}
                     heading={'Edit Task'}
                     taskDataObject={this.state.taskDataObject}
                     handleModalSubmit={this.handleSubmit}
                 />}
-                {this.state.openDeleteModal && <DeleteModal
+                {this.state.openDeleteModal && 
+                <DeleteModal
                     open={this.state.openDeleteModal}
                     handleClose={() => this.setState({ openDeleteModal: false })}
-                    handleModalSubmit={this.handleSubmit}
+                    handleModalSubmit={this.handleDeleteSubmit}
                 />}
             </>
         )
     }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state: IListPageProps) => {
     return {
         taskList: state.taskList
     }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch: any) => {
     return {
         getTaskList: () => dispatch(getTaskList()),
-        editTask: (payload) => dispatch(editTask(payload)),
-        deleteTask: (payload) => dispatch(deleteTask(payload))
+        editTask: (payload: object) => dispatch(editTask(payload)),
+        deleteTask: (payload: object) => dispatch(deleteTask(payload))
     }
 };
 
